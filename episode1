@@ -1,10 +1,10 @@
-Nemesis
+=Nemesis=
 
 De tout temps des hommes ont essayé de s'accaparer le pouvoir afin de faire plier l'humanité à leur volonté ou plus radicalement la détruire.
 Vous avez été envoyé d'un futur lointain afin de vous assurer que cela n'arrive pas et ainsi perpétuer le cycle temporel de votre réalité.
-Vous avez tout sacrifer pour cette mission sauf votre âme, vous n'avez pas le droit à l'échec.
+Vous avez tout sacrifier pour cette mission sauf votre âme, vous n'avez pas le droit à l'échec.
 
-Episode 1 - Une bonne vieille histoire de flingue
+==Episode 1 - Une bonne vieille histoire de flingue==
 Année 2042 - 8h03
 Terre, dans un laboratoire militaire souterrain proche de Paris
 
@@ -36,3 +36,82 @@ Homme
 "Déploiement."
 Les 4
 "Oui général"
+
+==Lieux==
+Salle de confinement du bfg9001
+Salle de contrôle sécurité en verre et caméra
+Laboratoire de test et recherche
+Bureaux
+Cantine
+Cuisine
+Salle de pause
+Toilettes
+Salle débarras maintenance
+Entrepôt de stockage
+Sas d'E/S avec ascenseur
+Gare souterraine train industrielle
+Couloirs
+Zone d'extension / travaux minage
+Prison
+Grande salle de réunion
+
+==PNJ==
+===Ennemis===
+Général SilverEye
+Shoty
+Magnus
+Scarlett
+BlackHat
+===Neutres====
+Militaires sécurité caméra
+Militaires sécurité physique
+Militaires Gradé
+Militaires d'élite
+Responsable du site
+Scientifiques laborentin
+Scientifiques chef d'équipe
+Scientifiques chercheur
+Responsable scientifique
+Informaticiens
+Cuisinier
+Commis
+Personnel d'entretien
+Responsable des stocks
+Magasinier
+Secrétaires
+Mécaniciens
+Cheminots
+Manutentionnaires
+Conducteur de chariots
+Mineurs
+Homme à tout faire / bricolo
+Chef de la prison
+
+==Objets==
+==skills==
+==timing general==
+==fiche de persos==
+==Prise de décision IA==
+Chaque PNJ a un arbre de décision subjectif qui est un graphe de décision pondéré.
+Ce graphe est composé de l'ensemble de chemins connus au début de l'aventure puis est évantuellement complété par des stratégies prise en cours de partie.
+Par exemple si un combat armé se déclenche un comportement général sera à disposition de toutes les IA : tiré, se cacher, fuir.
+Un pnj combattant expérimenté pourra obtenir d'autres stratégies.
+Le graphe de début de partie est l'ensemble des successions logiques cause / effet du type : Récupérer la clé <= entrer dans le bureau <= sympathiser avec le scientifique en place <= entrer dans le laboratoire <= trouver un déguisement de laborantin <= éliminer un scientifique <= se rendre au toilette.
+Un comportement de défaut plausible devra être définit si plus aucune décision n'est possible pour le personnage, par exemple allez ruminer à la cantine.
+
+Chaque noeud du graphe de décision (propre au PNJ pour rappel) est pondéré en fonction des caractéristiques mentales du PNJ.
+Modificateur de pondération pour décision de l'IA:
+* Intrépide => Poids d'une étape inconnu dans l'arbre de décision
+* Imprévisible / Fou => % de chance de dévier de la voie la plus logique
+* Patient / tétu => % de chance de réessayer après échec
+* Violent => Poids d'une étape de violence
+* Discret => Poids d'une étape de discrétion
+* Baratineur / charmeur => Poids d'une étape mondaine
+* Sang froid => Poids d'une étape dangeureuse
+* Calculateur => Longueur de calcul sur l'arbre de décision (peut en fait être aussi trompeur)
+* Joueur => Poids d'une étape hazardeuse
+* Technicien => Poids d'un étape technique avancée dans un domaine
+* Amour propre => Poids d'une étape dégradante
+* Volonté => Poids d'une étape contraire à un ordre donné par une autorité
+
+Le parcours du graphe pour la prochaine décision se fait de manière partielle, voir même d'un seul noeud, avec un alogrithme qui va bien, A* pour l'instant car c'est le seul que je connais.
