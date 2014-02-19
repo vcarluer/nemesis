@@ -1,0 +1,167 @@
+Objectif : Se positionner avec son fusil de snipe dans la salle de contrôle avec vue sur la sortie de la salle de confinement bfg9001
+Position de départ : Gare souterraine
+Uniforme de départ : Personnel d'entretien
+Objectifs partiels :
+Récupérer un uniforme militaire sur un militaire
+Cacher le corps du militaire
+Récupérer un uniforme de magasinier de l'entrepôt
+Cacher le corps du travailleur
+Récupérer un uniforme de garde de sécurité dans l'entrepôt
+Récupérer un uniforme de gradé dans l'entrepôt
+Récupérer un pass pour accéder à la salle de contrôle sur un gradé
+Cacher éventuellement le corps du militaire
+Accéder à la salle de contrôle
+Camoufler son fusil sniper
+Prendre le contrôle de la salle de sécurité
+Se déployer sans se faire repérer
+Désactiver les caméras de sécurités
+Désactiver les alarmes
+Récupérer une clé de maintenance sur un mécanicien
+Cacher éventuellement le corps
+Récupérer une clé de maintenance dans l'entrepôt
+Ouvrir le système de ventilation
+Parcourir le système de ventilation jusqur'à la salle de contrôle
+Prendre position dans le système de ventilation
+Eliminer discrètements les gardes de la salle de sécurité
+Récupérer un uniforme de scientifique
+Charmer une des militaires de la salle de sécurité et récupérer son badge
+Charmer une des militaires de la salle de sécurité et rentrer avec elle dans la salle de contrôle
+Récupérer une barre à mine dans la zone de minage
+Récupérer un pied de biche dans la zone de la gare
+Ouvrir les égouts
+Se déplacer jusqu'à la salle de contrôle
+Sortir discrètement des égouts
+Eliminer les gardes de la salle
+Récupérer un pain de semtex dans l'entrepôt
+Récupérer un pain de semtex dans la zone de minage
+Récupérer un uniforme de mineur dans l'entrepôt
+Récupérer un uniforme de mineur par élimination
+Cacher le corps
+Récupérer un uniforme de personnel d'entretien dans l'entrepôt
+Récupérer un uniforme sur personnel
+Cacher le corps
+Déposer l'explosif en vue de la salle de sécurité mais pas trop près
+Faire exploser l'explosif
+Profiter de la confusion pour pénétrer dans la salle de sécurité
+Récupérer un uniforme de commis dans l'entrepot
+Récupérer un uniforme de commis sur un commis
+cacher le corps
+Récupérer des repas
+Allez servir des repas dans la salle de sécurité vers midi
+Eliminer les gardes de la salle de sécurité
+Demander à BlackHat de hacké la porte de la salle de sécurité
+Récupérer un dispositif de pass universelle
+Récupérer un dispositif de hacking à distance
+déposer le dispositif de hacking à distance discrètement
+Attendre l'ouverture de la porte en pretextant un problème de pass
+Habillé en gradé, bluffé et demander à un garde de sortir
+Eliminer le garde
+Eliminer les autres gardes
+Allez dans la salle de réunion
+Appeler la salle des gardes et convoquer un garde
+Récupérer son badge
+Eliminer le garde
+Cacher le corps
+Demander de l'aide à Scarlett pour récupérer le badge avant
+
+Stratégies principales qui ressortent pour accéder à la salle : *oblige Shoty à éliminer les gardes tout de suite
+Récupérer un uniforme et un pass de miltaire de la salle ou gradé
+Passer par le système de ventilation
+Charmer un garde
+Passer par les égouts *
+Faire diversion avec une explosion
+Apporter des repas
+Hacker la porte déguisé en garde
+Récupérer un uniforme de gradé et faire sortir un garde *
+
+Stratégies de déploiement de son arme :
+Eliminer les gardes
+Se cacher dans le système de ventilation (possible uniquement si arrive par là)
+
+Objets potentiellement utiles :
+Uniforme militaire
+Uniforme de gradé
+Uniforme de manutentionnaire
+Uniforme de scientifique
+Uniforme de mineur
+Uniforme de mécanicien
+Uniforme de commis
+Uniforme d'agent d'entretien
+Barre à mine
+Pied de biche
+semtex
+Pass de sécurité
+Repas
+Clé du système de ventilation
+Fusil sniper
+
+Routines de comportement qui se dégagent :
+Se déguiser
+Accéder à l'entrepôt pour récupérer du matériel
+Tenter de voler sinon tuer et cacher le corps pour récupérer du matériel
+
+Risques :
+Se faire repérer en plein méfait => fuite / combat
+Laisser des traces qui se font repérées => augmentation de la sécurité
+
+Description de Shoty
+Shoty a deux moteurs dans la vie : l'adrénaline et le pognon.
+C'est un homme blanc de taille moyenne d'une trentaine d'années. Son visage est peu avenant, il est sec et tiré et est parcouru d'une balafre sur sa joue droite.
+Doté d'un humour de tueur il vaut généralement mieux être dans ses bons papiers, sous peine de recevoir une balle en pleine tête la veille de noël.
+Shoty évite la violence physique directe mais son entraînement à l'IRA l'a doté également de très bonnes compétences dans ce domaine.
+Taciturne et pas toujours très malin il se sort généralement assez mal d'une joute verbale, ce qui le laisse dans un état d'énervement incontrolable.
+Il a prévu d'aller profiter de son argent au soleil après ce casse risqué.
+
+Caractéristiques / compétences
+1-10
+Compétences
+* Tir : % de chance de touché et dégâts
+10
+* Combat au corps à corps : % de chance de touché et dégâts
+8
+* Comat arme blanche : % de chance de touché et dégâts
+7
+* Hacking
+3
+* Mécanique
+4
+* Pick pocket
+3
+* Reste 
+2
+* Joute verbale
+1
+* Garder son sang froid après une joute verbale
+1
+
+Carac
+* Charme : % de chance de convaincre / plaire
+1
+* Endurance : Fatigue / résistance
+7
+* Force : Temps / chance d'une action de force
+7
+* Intrépide => Poids d'une étape inconnu dans l'arbre de décision
+8
+* Imprévisible / Fou => % de chance de dévier de la voie la plus logique
+2
+* Patient / tétu => % de chance de réessayer après échec
+9
+* Violent => Poids d'une étape de violence
+9
+* Discret => Poids d'une étape de discrétion
+7
+* Baratineur / charmeur => Poids d'une étape mondaine
+1
+* Sang froid => Poids d'une étape dangeureuse
+9
+* Calculateur => Longueur de calcul sur l'arbre de décision (peut en fait être aussi trompeur)
+2
+* Joueur => Poids d'une étape hazardeuse
+4
+* Technicien => Poids d'un étape technique avancée dans un domaine
+3
+* Amour propre => Poids d'une étape dégradante
+1
+* Volonté => Poids d'une étape contraire à un ordre donné par une autorité
+2
