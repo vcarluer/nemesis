@@ -37,6 +37,8 @@ public class Map {
 	
 	private void parse() {
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
+		int columns = layer.getWidth();
+		int rows = layer.getHeight();
 		TiledMapTile tile1 = layer.getCell(0, 0).getTile();
 		boolean isWall1 = tile1.getProperties().containsKey("wall");
 		boolean isWall2 = layer.getCell(1, 1).getTile().getProperties().containsKey("wall");		
