@@ -22,6 +22,11 @@
     <property name="wall" value="true"/>
    </properties>
   </tile>
+  <tile id="49">
+   <properties>
+    <property name="wall" value=""/>
+   </properties>
+  </tile>
   <tile id="50">
    <properties>
     <property name="wall" value="true"/>
