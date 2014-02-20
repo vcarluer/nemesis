@@ -1,5 +1,6 @@
 package gamers.associate.nemesis;
 
+import gamers.associate.nemesis.ia.Director;
 import gamers.associate.nemesis.map.Map;
 import gamers.associate.nemesis.map.Room;
 
@@ -23,6 +24,7 @@ public class NemesisGame implements ApplicationListener {
 	private Sprite sprite;
 	private ShapeRenderer shapeRenderer;
 	private Map map;
+	private Director director;
 		
 	@Override
 	public void create() {		
@@ -45,6 +47,7 @@ public class NemesisGame implements ApplicationListener {
 		shapeRenderer = new ShapeRenderer();
 		
 		map = new Map();
+		director = new Director();
 	}
 
 	@Override
@@ -67,7 +70,7 @@ public class NemesisGame implements ApplicationListener {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		map.render(shapeRenderer);
-		
+		director.render(shapeRenderer);
 		shapeRenderer.end();
 	}
 
