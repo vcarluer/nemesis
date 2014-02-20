@@ -1,0 +1,33 @@
+Chaque pnj a une liste d'actions possibles liés entre elles dans un graphe pondéré.
+Chaque action correspond a un sous ensemble des paramètres suivant :
+* Action de jeu
+* Cible de l'action de jeu
+
+Contrainte possible :
+* Plage horaire
+* Lieux
+* Niveau de discrétion
+...
+
+Routine :
+* Recherche un objet dans une pièce
+* Se déplacer vers une pièce
+* Choisir la prochaine action
+* Changer d'uniforme
+
+Scénario de prototype :
+Shoty récupère un uniforme de militaire et se rend dans la salle de contrôle
+
+
+PNJ : Shoty
+Lieux : 
+Gare souterraine
+Hall principal
+Entrepot
+Salle de contrôle
+Objets
+Uniforme de personnel d'entretien
+Uniforme de militaire
+
+Chaîne de décision
+Allez à la salle de contrôle<=mettre l'uniforme militaire<=récupérer l'uniforme miltaire<=Aller dans l'entrepôt
