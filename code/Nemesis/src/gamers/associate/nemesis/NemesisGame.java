@@ -1,5 +1,6 @@
 package gamers.associate.nemesis;
 
+import gamers.associate.nemesis.map.Map;
 import gamers.associate.nemesis.map.Room;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -21,8 +22,8 @@ public class NemesisGame implements ApplicationListener {
 	private Texture texture;
 	private Sprite sprite;
 	private ShapeRenderer shapeRenderer;
-	private Room[] rooms;
-	
+	private Map map;
+		
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
@@ -42,9 +43,8 @@ public class NemesisGame implements ApplicationListener {
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 		
 		shapeRenderer = new ShapeRenderer();
-		rooms = new Room[1];
-		Room room1 = new Room(0, 0, 50, 100, Color.RED);
-		rooms[0] = room1;
+		
+		map = new Map();
 	}
 
 	@Override
@@ -66,9 +66,7 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		for (Room room : rooms) {
-			room.render(shapeRenderer);			
-		}
+		map.render(shapeRenderer);
 		
 		shapeRenderer.end();
 	}
