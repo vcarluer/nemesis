@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="military" tilewidth="32" tileheight="32">
+  <image source="../Graphisme/Tileset/armybaseinterior.png" width="256" height="736"/>
+  <terraintypes>
+   <terrain name="Nouveau terrain" tile="-1">
+    <properties>
+     <property name="Metal" value="true"/>
+    </properties>
+   </terrain>
+  </terraintypes>
+  <tile id="0" terrain="0,0,0,0"/>
+  <tile id="1" terrain="0,0,0,0"/>
+  <tile id="2" terrain="0,0,0,0"/>
+  <tile id="3" terrain="0,0,0,0"/>
+  <tile id="8" terrain="0,0,0,0"/>
+  <tile id="9" terrain="0,0,0,0"/>
+  <tile id="10" terrain="0,0,0,0"/>
+  <tile id="11" terrain="0,0,0,0"/>
+  <tile id="16" terrain="0,0,0,0"/>
+  <tile id="17" terrain="0,0,0,0"/>
+  <tile id="18" terrain="0,0,0,0"/>
+  <tile id="19" terrain="0,0,0,0"/>
+ </tileset>
+ <layer name="Floor" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1rEJgEAQBMBrwxpEA9sxtDJDu9SHj+QRAzkemYFtYBeOiwCAbywvQp7S93hlamQOe2QrfQ8PsUeu0vdec99iDXtkK30fNfc9trBHNveqL/boS+uv9e8CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/NMJW3wM2g==
+  </data>
+ </layer>
+ <objectgroup name="Objects1" width="100" height="100">
+  <object name="wall" x="192" y="160" width="224" height="32">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="160" y="128" width="288" height="32">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="416" y="160" width="32" height="224">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="160" y="160" width="32" height="224">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="192" y="352" width="64" height="32">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="320" y="352" width="96" height="32">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="192" y="256" width="64" height="32">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+  <object name="wall" x="384" y="224" width="32" height="64">
+   <properties>
+    <property name="wall" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

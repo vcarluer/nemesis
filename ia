@@ -1,3 +1,5 @@
+http://en.wikipedia.org/wiki/List_of_game_AI_middleware
+
 Chaque pnj a une liste d'actions possibles liés entre elles dans un graphe pondéré.
 Chaque action correspond a un sous ensemble des paramètres suivant :
 * Action de jeu
