@@ -1,5 +1,7 @@
 package gamers.associate.nemesis.map;
 
+import gamers.associate.nemesis.ia.Node;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,10 +16,15 @@ public class Map {
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	private TiledMapTileSet tileSet;
-	private TiledMapTileLayer layer;
+	private TiledMapTileLayer layerFloor;
+	private TiledMapTileLayer layerFront;
+	private TiledMapTileLayer layerItems;
+	private TiledMapTileLayer layerTrigger;
 	private Texture textureTiles;
 	private TextureRegion textureRegionCeil;
 	private TextureRegion textureRegionWall;
+	private boolean[][] walls;
+	private Node playerStart;
 	
 	public Map(OrthographicCamera camera)
 	{					
@@ -27,8 +34,14 @@ public class Map {
 		renderer.setView(camera);		
 	}
 	
-	public void render() {
-		renderer.render();
+	public void renderFloor() {
+		int[] backgroundLayers = { 0, 2 };
+		renderer.render(backgroundLayers);		
+	}
+	
+	public void renderFront() {
+		int[] foregroundLayers = { 1 };
+		renderer.render(foregroundLayers);		
 	}
 	
 	private void build() {
@@ -36,11 +49,62 @@ public class Map {
 	}
 	
 	private void parse() {
-		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
-		int columns = layer.getWidth();
-		int rows = layer.getHeight();
-		TiledMapTile tile1 = layer.getCell(0, 0).getTile();
-		boolean isWall1 = tile1.getProperties().containsKey("wall");
-		boolean isWall2 = layer.getCell(1, 1).getTile().getProperties().containsKey("wall");		
+		layerFloor = (TiledMapTileLayer)map.getLayers().get(0);
+		layerFront = (TiledMapTileLayer)map.getLayers().get(1);
+		layerItems = (TiledMapTileLayer)map.getLayers().get(2);
+		layerTrigger = (TiledMapTileLayer)map.getLayers().get(3);
+		
+		int columns = layerFloor.getWidth();
+		int rows = layerFloor.getHeight();
+		setWalls(new boolean[rows][columns]);
+		
+		for (int x = 0; x < columns; x++) {
+			for (int y = 0; y < rows; y++) {
+				TiledMapTileLayer.Cell cell = layerFloor.getCell(x, y);
+				if (cell != null) {
+					TiledMapTile tile = cell.getTile();
+					if (tile.getProperties().containsKey("wall")) {
+						getWalls()[x][y] = true;
+					}
+				}				
+			}
+		}		
+		
+		parsePlayerStart();
+	}
+	
+	private void parsePlayerStart()
+	{
+		int columns = layerItems.getWidth();
+		int rows = layerItems.getHeight();
+		
+		for (int x = 0; x < columns; x++) {
+			for (int y = 0; y < rows; y++) {
+				TiledMapTileLayer.Cell cell = layerTrigger.getCell(x, y);
+				if (cell != null) {
+					TiledMapTile tile = cell.getTile();
+					if (tile.getProperties().containsKey("PlayerStart")) {
+						setPlayerStart(new Node(x, y));
+						return;
+					}
+				}				
+			}
+		}
+	}
+
+	public boolean[][] getWalls() {
+		return walls;
+	}
+
+	public void setWalls(boolean[][] walls) {
+		this.walls = walls;
+	}
+
+	public Node getPlayerStart() {
+		return playerStart;
+	}
+
+	public void setPlayerStart(Node playerStart) {
+		this.playerStart = playerStart;
 	}
 }

@@ -49,7 +49,7 @@ public class NemesisGame implements ApplicationListener {
 		shapeRenderer = new ShapeRenderer();
 		
 		map = new Map(camera);
-		director = new Director();
+		director = new Director(map);
 	}
 
 	@Override
@@ -71,8 +71,9 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		map.render();
-		// director.render(shapeRenderer);
+		map.renderFloor();
+		director.render(shapeRenderer);
+		map.renderFront();
 		shapeRenderer.end();
 	}
 
