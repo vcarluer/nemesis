@@ -32,6 +32,8 @@ public class NemesisGame implements ApplicationListener {
 		float h = Gdx.graphics.getHeight();
 		
 		camera = new OrthographicCamera(w, h);
+		camera.translate(w / 2f, h / 2f);
+		camera.update();
 		batch = new SpriteBatch();
 		
 		/*texture = new Texture(Gdx.files.internal("data/libgdx.png"));
@@ -46,7 +48,7 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer = new ShapeRenderer();
 		
-		map = new Map();
+		map = new Map(camera);
 		director = new Director();
 	}
 
@@ -69,8 +71,8 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		map.render(shapeRenderer);
-		director.render(shapeRenderer);
+		map.render();
+		// director.render(shapeRenderer);
 		shapeRenderer.end();
 	}
 

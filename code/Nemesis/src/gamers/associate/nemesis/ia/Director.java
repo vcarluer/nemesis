@@ -21,7 +21,7 @@ public class Director {
 	}
 	
 	private void initNpcs() {
-		Npc shoty = new Npc(25, 25, 10, 20, Color.GREEN, "shoty");
+		Npc shoty = new Npc(25, 25, 16, 32, Color.GREEN, "shoty");
 		npcs.add(shoty);
 	}
 }
