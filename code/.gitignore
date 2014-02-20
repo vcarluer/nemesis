@@ -18,7 +18,6 @@ local.properties
 
 # Eclipse.gitignore https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
 *.pydevproject
-.project
 .metadata
 bin/**
 tmp/**

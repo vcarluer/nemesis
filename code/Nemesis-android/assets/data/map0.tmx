@@ -57,6 +57,16 @@
     <property name="wall" value="true"/>
    </properties>
   </tile>
+  <tile id="100">
+   <properties>
+    <property name="sniper" value=""/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="sniper" value=""/>
+   </properties>
+  </tile>
   <tile id="112">
    <properties>
     <property name="wall" value="true"/>
@@ -136,6 +146,11 @@
  <layer name="Front" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJzt1DEOQVEQhlH7ETaktAJU2AIdnRAihCgt0EQh771I3IYhzkm+4ia3+KtptQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4VavsAdTsC/6so827h3B3KfhziI7vHsLdtfF2v75Lyf3ic0ruF5/TvF/kmkXzynsQDaNRzpy/t4iWlfc4mkTTnDkAJGlHnSd1M0fBl9hGu+wRPJyic/YIXuplD6Cmnz0Akt0ASAIRXw==
+  </data>
+ </layer>
+ <layer name="Items" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzrENAAAIw7A+C/+fQL9gsaXsSQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4N+0/Z4AAAAAAACoAzW8AMw=
   </data>
  </layer>
 </map>
