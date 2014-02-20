@@ -31,8 +31,8 @@ public class NemesisGame implements ApplicationListener {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
-		camera = new OrthographicCamera(w, h);
-		camera.translate(w / 2f, h / 2f);
+		camera = new OrthographicCamera(w / 32f, h / 32f);
+		camera.translate(w / 64f, h / 64f);
 		camera.update();
 		batch = new SpriteBatch();
 		

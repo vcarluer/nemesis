@@ -26,7 +26,7 @@ public class Director {
 	
 	private void initNpcs() {
 		Node pos = this.map.getPlayerStart();
-		Npc shoty = new Npc(pos.x * 32, pos.y * 32, 16, 32, Color.GREEN, "shoty");
+		Npc shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");
 		npcs.add(shoty);
 	}
 }

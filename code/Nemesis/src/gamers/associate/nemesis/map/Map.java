@@ -30,7 +30,7 @@ public class Map {
 	{					
 		build();		
 		parse();
-		renderer = new OrthogonalTiledMapRenderer(map);
+		renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);
 		renderer.setView(camera);		
 	}
 	
