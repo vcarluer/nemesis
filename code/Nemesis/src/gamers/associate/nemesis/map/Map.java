@@ -26,16 +26,17 @@ public class Map {
 	private boolean[][] walls;
 	private Node playerStart;
 	
-	public Map(OrthographicCamera camera)
+	public Map()
 	{					
 		build();		
 		parse();
 		renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);
-		renderer.setView(camera);		
+				
 	}
 	
-	public void renderFloor() {
+	public void renderFloor(OrthographicCamera camera) {
 		int[] backgroundLayers = { 0, 2 };
+		renderer.setView(camera);
 		renderer.render(backgroundLayers);		
 	}
 	
