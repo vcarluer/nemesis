@@ -33,3 +33,169 @@ Uniforme de militaire
 
 Chaîne de décision
 Allez à la salle de contrôle<=mettre l'uniforme militaire<=récupérer l'uniforme miltaire<=Aller dans l'entrepôt
+
+Conception
+Une ia a un graphe d'Actions courant
+Un graphe d'action a toujours une action de départ
+Une ia a une action du graphe en cours d'exécution
+un graphe peut boucler et n'a donc pas forcément d'action de fin.
+
+Une action correspond a un comportement d'un acteur sur une cible
+Une action évolue en fonction du delta
+Une action modifie un acteur
+Le step de l'action renvoi l'état terminé si nécessaire
+
+l'ia choisis la prochaine action en cours en fonction de son graphe d'objet et de ses paramètres de sélection
+
+Actions particulières :
+Attendre
+Changer de routine = Ajout d'une routine et ou changement de priorité.
+
+Actions standards
+Se déplacer
+Prendre
+Utiliser
+Observer : tout le monde observe généralement tout le temps. la routine d'observation est toujours la plus basse : pas d'observation si la tête est occupé à autre chose.
+
+Graphe multiple :
+L'ia peut avoir plusieurs graphe d'action / routine en //
+en cas de conflit d'action il faudra trancher
+ex : se déplacer vers la cible et tiré pour se protéger
+se déplacer et rechercher
+Utiliser un objet tout en discutant
+
+Des malus devrait être appliqués sur actions multiples éventuellement.
+Les graphes d'actions doivent être traité par priorité pour gérer les conflits.
+
+Les conflits peuvent survenir sur les actions utilisant les mêmes parties du corps :
+Jambes / position du corps
+bras
+tête (attention) / bouche pour les dialogues / Observation
+
+une routine est soit en cours soit n'existe pas (pas d'état).
+
+Généralement une action demandera un déplacement, les jambes seront donc frequemment en conflit et un seul des 2 graphes pourra donc avancé. de plus des comportements idiots pourrait survenir si un 2 eme graphe prenait la main sur un déplacement alors que le 1er graphe n'a pas besoin de déplacement pour l'instant. Le déplacement l'amènerait loin pour rien ou le personnage agirait de manière bizzare (commence à partir et revient).
+Les jambes donc (le déplacement) devrait donc être affecté au seul graphe d'objet de plus haute priorité (ça ça peut changer éventuellement). Cela elimine d'office les noeuds action qui ont besoin des jambes. Les autres actions peuvent par contre être faites.
+
+En faite plutôt que jambe la notion de position du corps pourrait être utilisé (plus général avec les véhicules notamment).
+
+
+Patrouiller par exemple revient aux 2 routines suivantes : Se déplacer dans différentes pièces en rond ET observer / Oberver
+
+Une routine peut être lié à une élément déclencheur et donc a une condition.
+La routine éventuellement détruite sur une autre condition définit dans la routine.
+
+Chaque ia devra posséder une routine fallback de comportement par défaut sans condition de sortie.
+Le changement de priorité des routines est un comportement propre à l'ia sur ses caractéristiques. Par exemple si il est blessé il pourra soit continuer sa mission en essayant de se protéger soit mettre la routine de protection en plus haute priorité et se contenter de se défendre.
+
+Actions et timing :
+Chaque action prend un certain temps à réaliser, l'animation graphique est fonction de ce temps.
+Une action peut être interruptible ou non. Déplacement est interruptibe, utiliser objet ne l'est pas.
+une action non interruptible débranchera quand même éventuellement sur l'interruption à la fin...
+Toute action peut être annulé de force (mort)
+
+Une action peut échouer (jet de proba raté). L'action suivante sera tiré par l'ia en fonction de ses carac. Il peut la retenter éventuellement si possible.
+Liens entre les actions
+certaines actions ont donc une ou plusieurs conditions / contraintes pour pouvoir être envisagé.
+Ces conditions peuvent être la possession d'un objet par exemple ou bien le respect d'un horaire.
+Dans ce 2ème cas il faut trancher s'il vaut mieux attendre ou pas, généralement oui.
+On peut imaginer également un temps maximum pour exécuter l'action (si l'ia n'arrive pas à entrer pendant 1 heure dans la pièce il abandonne)
+
+Actions "longues", complexe, déplacement.
+Certaines actions longues peuvent être difficle à gérer car interruptibles.
+Il est possible de découper une actions longues en sous actions plus simple déjà.
+ex, le pathfinding détermine les 3 pièces dans lesquels passés, plutôt qu'une seule action de déplacement il est possible de créer une nouvelle routine de 3 actions de priorité plus elevé.
+Chaque action représente un déplacement d'une pièces à l'autre (premier tile de la pièce en connection), déplacement qui lui même calculerait un a* plus précis.
+L'afinage de comportement se gèrera donc comme une pile de routines comme le reste.
+Ces routines sont liés là une action d'une autre routine : l'action source de plus bas niveau détruit en cascade la routine de plus haut niveau.
+
+Une interruption destructive complète serait uniquement la création d'une sous-routine non lié à l'action => Devient indépendante, et destruction de la routine de l'action de base.
+
+Il est possible de définir les stratégies complexes de cette manière.
+Ces routines serait composées d'actions conteneur uniquement qui ne ferait que créer des sous-routines liées.
+si une action de ce type est reproductible, cela permet à l'ia de reessayer l'action en changeant de stratégie.
+
+Liens entre action.
+2 actions doivent pouvoir se transmettre des informations. Par exemple l'action de recherche d'un uniforme doit passer à l'action de prendre l'uniforme ou il se trouve.
+1 acton peut avoir comme contrainte qu'une autre action soit en cours, Par exemple l'action de déplacement lors d'une recherche n'est valide que si l'ia a la capacité de rechercher (et n'est pas en train de viser par exemple...) : peut être gérer par la liste des conditions déjà définit.
+l'action suivante d'une action d'une sous routine peut être celle du parent qui annule toutes ces sous routines lié et passe à la suite.
+La plupart des actions doivent avoir une condition de lieu également pour pouvoir annulé si le personnage s'est déplacé à cause d'une sous routine.
+
+Les actions et ses sous actions peuvent être liées de 3 manières différentes. Il n'y a pas de mélange entre ces modes (nouvelle action intermédiaire nécessaire).
+Action = 1 opérateur
+Séquence : les actions doivent être executer les unes après les autres.
+Choix (ou) : 1 action doit être choisis dans la liste
+Parallèle (et) : les actions doivent être démarrer en même temps.
+
+ 
+En résumé, un acteur ne peut executer qu'une action sur chaque routine //. Ces actions ne doivent pas rentrer en conflit; conflit qui est traité avec l'ordre de priorité de la routine.
+Actions d'une ia = action de déplacement la plus haute possible + action bras / utilisation la plus haute possible + action tête la plus haute possible.
+ex : Se déplacer en tirant et en hurlant
+
+cf. ci-dessous action et routines mergés
+Action (instance pour un acteur)
+Nom/id
+Acteur
+Parties du corps (position, bras, tête)
+Cible
+Interruptible
+Etat (pas commencé, en cours, succès, échec)
+Reproductible
+Actions suivantes
+Conditions (autre action en cours, plage de temps, lieux)
+Temps (dynamique)
+Avancer(delta de temps)
+(temps max)
+Action d'interruption
+Liste des actions
+Operateur sur action (séquence, et, ou)
+Liste des sous actions en cours par ordre de priorité
+Executer action suivante(paramètres)
+Niveau de priorité
+Action de départ
+Condition de sortie / destruction
+
+DESSIN! (ordre de priorité inversé, du plus petit au plus important) [] = routine, || = action
+Exemple sur une branche en cours
+
+[Routine de comportement principal]
+	[Routine par défault]...
+		[Sous routine defaut]
+			[sous routine défaut 2] = Se déplacer à la cafet
+	[Se mettre en position de sniper] = |Choix d'une strategie sniper|
+						/\
+					[Se faire passer pour un grader] = Aller à l'entrepôt|Mettre un uniforme de gradé|Aller dans la salle de contrôle
+													/\
+							[Mettre un uniforme de gradé] = Rechercher un uniforme|Prendre l'uniforme|Utiliser l'uniforme
+												/\
+								[Rechercher un item] = Regarder autour pour item
+								[Parcourir une pièce] = Parcourir la pièce (dépendance sur recherche)
+	[Interruption combat] = choix d'une stratégie
+					/\
+					[tirer]
+					[Se mettre à couvert]
+
+
+sans combat L'ia est en train de parcourir la pièce (jambes) et de regarder autour de lui pour trouver l'uniforme (tête).
+avec combat il se met à couvert en tirant.
+
+
+? Fusion Action et routine ? => Oui
+Une routine peut être considéré comme une action conteneur, la notion de routine n'est donc pas obligatoire (ou celle d'action).
+
+Une liste des actions en cours devra être tenu classé par ordre de priorité.
+On parcours le graph des source actions en cours par ordre de priorité inversé jusqu'au feuilles (action réellement en cours) pour trouver les 3 actions jambes, bras, tête.
+Une fois ces 3 actions déterminées on applique.
+Priorité = poids, on prends le poids le plus elevé jusqu'aux feuilles.
+
+Il y a deux graphes : 
+le graphes des actions possibles => liste
+le graphes des actions en cours => Arbre
+
+Il n'y as pas dans ce mode de routine globale et complexe sous forme de circuit. 1 circuit existe par l'ensemble des actions mais il n'a pas définit globalement, uniquement action par action
+Chaque opérateur, Séquence, et, ou correspond à une action.
+
+
+
+
+

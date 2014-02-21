@@ -23,7 +23,6 @@ public class CameraManager implements ApplicationListener {
 		float h = Gdx.graphics.getHeight();
 		
         cam = new OrthographicCamera(w / 32f, h / 32f);        
-
         cam.translate(w / 64f, h / 64f);
         cam.update();
 
