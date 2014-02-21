@@ -222,4 +222,9 @@ Une notion de 'mémoire' peut être mise en place.
 MEMOIRE
 L'uniforme de gradé est en 50, 65
 
+
 Cette mémoire devient une condition pour les actions. 
+Le comportement par défaut pour les 3 éléments est le suivant :
+jambe : rester sur place
+bras : les balancer
+tête : observer / rêver

@@ -1,0 +1,11 @@
+* Un système de haut parleur dans la base.
+Quand une annonce est lancé un gros haut parleur apparait en haut avec le texte
+
+Actions de base :
+déplacer
+parler
+lancer
+utiliser
+
+Laisser activer un item / action (comme un gun) double clique ou 2 * la touche de l'action. Tous les boutons gauches suivants font cette action.
+Désactiver si autre action choisis
