@@ -3,9 +3,11 @@ package gamers.associate.nemesis;
 import gamers.associate.nemesis.ia.Director;
 import gamers.associate.nemesis.map.Map;
 import gamers.associate.nemesis.map.Room;
+import gamers.associate.nemesis.ui.CameraManager;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,7 +20,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class NemesisGame implements ApplicationListener {
-	private OrthographicCamera camera;
+	private CameraManager camera;
 	private SpriteBatch batch;
 	/*private Texture texture;
 	private Sprite sprite;*/
@@ -31,9 +33,9 @@ public class NemesisGame implements ApplicationListener {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
-		camera = new OrthographicCamera(w / 32f, h / 32f);
-		camera.translate(w / 64f, h / 64f);
-		camera.update();
+		
+		camera = new CameraManager();
+		
 		batch = new SpriteBatch();
 		
 		/*texture = new Texture(Gdx.files.internal("data/libgdx.png"));
@@ -48,7 +50,7 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer = new ShapeRenderer();
 		
-		map = new Map(camera);
+		map = new Map();
 		director = new Director(map);
 	}
 
@@ -59,23 +61,25 @@ public class NemesisGame implements ApplicationListener {
 	}
 
 	@Override
-	public void render() {		
+	public void render() {
+		
+		camera.render();
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		batch.setProjectionMatrix(camera.combined);
-
+	
 		director.step(Gdx.graphics.getDeltaTime());
+		//batch.setProjectionMatrix(camera.cam.combined);
+		
 		/*batch.begin();
 		sprite.draw(batch);
-		batch.end();*/
-		
-		shapeRenderer.setProjectionMatrix(camera.combined);
+		batch.end();*/		
+		shapeRenderer.setProjectionMatrix(camera.cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		map.renderFloor();
+		map.renderFloor(camera.cam);
 		director.render(shapeRenderer);
 		map.renderFront();
 		shapeRenderer.end();
+		
 	}
 
 	@Override
