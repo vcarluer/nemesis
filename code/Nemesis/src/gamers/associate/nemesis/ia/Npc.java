@@ -6,6 +6,7 @@ import gamers.associate.nemesis.common.BasicShape;
 
 public class Npc extends BasicShape {
 	private String name;	
+	private float thinkSpeed;
 	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -14,5 +15,13 @@ public class Npc extends BasicShape {
 	
 	public void step(float delta) {
 		
+	}
+
+	public float getThinkSpeed() {
+		return thinkSpeed;
+	}
+
+	public void setThinkSpeed(float thinkSpeed) {
+		this.thinkSpeed = thinkSpeed;
 	}	
 }

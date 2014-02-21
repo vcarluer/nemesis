@@ -141,19 +141,22 @@ Nom/id
 Acteur
 Parties du corps (position, bras, tête)
 Cible
-Interruptible
+Type (immédiat ou durée)
 Etat (pas commencé, en cours, succès, échec)
 Reproductible
 Conditions (autre action en cours, plage de temps, lieux, mémoire)
-Temps (dynamique), non obligatoire
 Avancer(delta de temps)
 (temps max)
 Liste des actions
 Operateur sur action (et, ou)
 Liste des sous actions en cours par ordre de priorité
-Niveau de priorité
+(Niveau de priorité)
 Condition de sortie / destruction
 Temps de reflexion
+pre time / animation
+post time / animation
+Seuil
+Valeur en cours
 
 DESSIN! (ordre de priorité inversé, du plus petit au plus important) [] = routine, || = action
 Exemple sur une branche en cours
