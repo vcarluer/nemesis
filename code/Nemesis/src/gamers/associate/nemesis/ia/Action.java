@@ -10,7 +10,6 @@ public abstract class Action {
 	protected String id;	
 	protected Npc npc;
 	protected EnumSet<BodyConstraint> bodyConstraints;
-	protected GameItem target;
 	protected boolean Repeatable;
 	protected List<IAssert> conditions;	
 	protected List<IAssert> exitConditions;
@@ -20,11 +19,12 @@ public abstract class Action {
 	protected float currentValue;
 	protected List<Action> childActions;
 	
-	public Action() {
+	public Action(Npc npc) {
 		conditions = new ArrayList<IAssert>();	
 		exitConditions = new ArrayList<IAssert>();
 		childActions = new ArrayList<Action>();
 		bodyConstraints = createBodyConstraints();
+		this.npc = npc;
 	}
 	
 	// Return true if 
@@ -58,7 +58,7 @@ public abstract class Action {
 			} else {
 				// If a higher level move to do is known cancel other actions to move
 				if (choice.getPositionAction() == null && bodyConstraints.contains(BodyConstraint.Position)) {
-					choice.setPositionAction(new ActionMoveStay());
+					choice.setPositionAction(new ActionMoveStay(npc));
 				}
 			}
 		}

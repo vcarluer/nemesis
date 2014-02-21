@@ -15,7 +15,7 @@ public class Npc extends BasicShape {
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
-		rootAction = new ActionIdle();
+		rootAction = new ActionIdle(this);
 		actionChoice = new ActionChoice();
 	}
 	

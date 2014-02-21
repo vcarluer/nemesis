@@ -8,7 +8,8 @@ public abstract class ActionThinkActions extends ActionSustained {
 	protected ActionOperator childActionsOperator;
 	protected int thinkComplexity;
 	
-	public ActionThinkActions() {
+	public ActionThinkActions(Npc npc) {
+		super(npc);
 		possibleActions = createPossibleActions();
 		childActionsOperator = ActionOperator.AND;
 		
