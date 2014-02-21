@@ -25,7 +25,8 @@ animation de début
 Action réelle / résultat
 animation de fin
 
-Dans ce cadre une animation ne serait annuable que pendant l'animation de début.
+Dans ce cadre une animation ne serait annuable que pendant l'animation de début et éventuellement sur pendant une action longue.
+Si l'animation de début a été terminé, l'action de sortie doit être jouée.
 
 certains gardes ou personnels sont a la solde de l'ennemis d'autres non
 il est possible de révélé son identité
