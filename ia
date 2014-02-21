@@ -132,7 +132,10 @@ En résumé, un acteur ne peut executer qu'une action sur chaque routine //. Ces
 Actions d'une ia = action de déplacement la plus haute possible + action bras / utilisation la plus haute possible + action tête la plus haute possible.
 ex : Se déplacer en tirant et en hurlant
 
-cf. ci-dessous action et routines mergés
+cf. ci-dessous :
+action et routines mergés
+Plus de lien de précédence !
+
 Action (instance pour un acteur)
 Nom/id
 Acteur
@@ -141,19 +144,16 @@ Cible
 Interruptible
 Etat (pas commencé, en cours, succès, échec)
 Reproductible
-Actions suivantes
-Conditions (autre action en cours, plage de temps, lieux)
-Temps (dynamique)
+Conditions (autre action en cours, plage de temps, lieux, mémoire)
+Temps (dynamique), non obligatoire
 Avancer(delta de temps)
 (temps max)
-Action d'interruption
 Liste des actions
-Operateur sur action (séquence, et, ou)
+Operateur sur action (et, ou)
 Liste des sous actions en cours par ordre de priorité
-Executer action suivante(paramètres)
 Niveau de priorité
-Action de départ
 Condition de sortie / destruction
+Temps de reflexion
 
 DESSIN! (ordre de priorité inversé, du plus petit au plus important) [] = routine, || = action
 Exemple sur une branche en cours
@@ -195,7 +195,31 @@ le graphes des actions en cours => Arbre
 Il n'y as pas dans ce mode de routine globale et complexe sous forme de circuit. 1 circuit existe par l'ensemble des actions mais il n'a pas définit globalement, uniquement action par action
 Chaque opérateur, Séquence, et, ou correspond à une action.
 
+La prise de décision (ou) et même le lancement de nouvelles actions pourraient être sujette a un temps de reflexion de la part de l'ia.
+ce temps pourrait ensuite varié en fonction du context (état, environnement, carac...)
 
 
+suite et pas fin
+Le type d'opérateur séquence n'est pas obligatoire a priori.
+Cela pourrait être géré par opérateur et + conditions + condition corps.
+Les premières actions seraient de + haute priorité
 
+La condition de corps pourrait être ajouté dans la liste des conditions normales.
+peut être plsu compliqué... mais + logique en fait, juste les 2 opérateurs de base.
+Eventuellement mettre une condition sur l'état d'une autre action et c bon mais pas obligé.
+Dans ce cadre il n'y a pas de liste d'actions suivantes.
+Une fois l'action terminé elle est détruite ou marqué comme terminé.
+Le moteur d'ia passe donc à l'action de plus basse priorité, ie suivante.
+et = on créé toutes les sous actions avec priorité
+ou = on créé qu'une seul action
 
+plus besoin d'action de départ, c'est l'action avec la plus haute priorité c'est tout !
+
+Action d'interruption a été retiré également. Si l'action n'est pas interruptible elle ne pourra pas être remplacé tant que pas finis c'est tout.
+Il faut par contre trouver un autre moyen de faire passer les éléments entre les actions.
+Une notion de 'mémoire' peut être mise en place.
+
+MEMOIRE
+L'uniforme de gradé est en 50, 65
+
+Cette mémoire devient une condition pour les actions. 
