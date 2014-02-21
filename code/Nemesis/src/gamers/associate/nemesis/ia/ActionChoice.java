@@ -26,4 +26,24 @@ public class ActionChoice {
 	public boolean isChoiceDone() {
 		return positionAction != null && handsAction != null && headAction != null;
 	}
+	
+	public void reset() {
+		positionAction = null;
+		handsAction = null;
+		headAction = null;
+	}
+	
+	public void step(float delta) {
+		if (positionAction != null) {
+			positionAction.step(delta);
+		}
+		
+		if (handsAction != null) {
+			handsAction.step(delta);
+		}
+		
+		if (headAction != null) {
+			headAction.step(delta);
+		}
+	}
 }

@@ -58,7 +58,7 @@ public abstract class Action {
 			} else {
 				// If a higher level move to do is known cancel other actions to move
 				if (choice.getPositionAction() == null && bodyConstraints.contains(BodyConstraint.Position)) {
-					choice.setPositionAction(new MoveStay());
+					choice.setPositionAction(new ActionMoveStay());
 				}
 			}
 		}

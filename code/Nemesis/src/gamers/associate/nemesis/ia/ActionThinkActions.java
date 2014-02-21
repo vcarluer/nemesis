@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class ActionThinkActions extends ActionSustained {
 	protected List<Action> possibleActions;
 	protected ActionOperator childActionsOperator;
+	protected int thinkComplexity;
 	
 	public ActionThinkActions() {
 		possibleActions = createPossibleActions();
@@ -13,8 +14,13 @@ public abstract class ActionThinkActions extends ActionSustained {
 		
 		bodyConstraints = EnumSet.of(BodyConstraint.Head);
 		
-		// by default 1 second by possible actions
-		animationValue = possibleActions.size() * 1000;
+		thinkComplexity = definePossibleActionThinkTime();
+		animationValue = possibleActions.size() * thinkComplexity;
+	}
+	
+	protected int definePossibleActionThinkTime() {
+		// 500 ms per possible action
+		return 500;
 	}
 	
 	@Override
