@@ -11,11 +11,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Director {
 	private List<Npc> npcs;
 	private Map map;
+	private Npc shoty;
 	
 	public Director(Map map) {
 		npcs = new ArrayList<Npc>();
 		this.map = map;
 		initNpcs();
+	}
+	
+	public void step(float delta) {
+		for (Npc npc : npcs) {
+			npc.step(delta);
+		}
 	}
 	
 	public void render(ShapeRenderer renderer) {
@@ -26,7 +33,7 @@ public class Director {
 	
 	private void initNpcs() {
 		Node pos = this.map.getPlayerStart();
-		Npc shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");
+		shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");
 		npcs.add(shoty);
 	}
 }

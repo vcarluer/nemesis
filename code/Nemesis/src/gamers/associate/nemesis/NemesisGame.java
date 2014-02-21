@@ -64,7 +64,8 @@ public class NemesisGame implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(camera.combined);
-				
+
+		director.step(Gdx.graphics.getDeltaTime());
 		/*batch.begin();
 		sprite.draw(batch);
 		batch.end();*/

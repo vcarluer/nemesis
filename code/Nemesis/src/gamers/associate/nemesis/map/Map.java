@@ -1,6 +1,7 @@
 package gamers.associate.nemesis.map;
 
 import gamers.associate.nemesis.ia.Node;
+import gamers.associate.nemesis.items.Sniper;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ public class Map {
 	private TextureRegion textureRegionWall;
 	private boolean[][] walls;
 	private Node playerStart;
+	private Node playerTarget;
 	
 	public Map(OrthographicCamera camera)
 	{					
@@ -71,12 +73,12 @@ public class Map {
 		}		
 		
 		parsePlayerStart();
+		parseItems();
 	}
 	
-	private void parsePlayerStart()
-	{
-		int columns = layerItems.getWidth();
-		int rows = layerItems.getHeight();
+	private void parsePlayerStart()	{
+		int columns = layerTrigger.getWidth();
+		int rows = layerTrigger.getHeight();
 		
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {
@@ -91,6 +93,24 @@ public class Map {
 			}
 		}
 	}
+	
+	private void parseItems() {
+		int columns = layerItems.getWidth();
+		int rows = layerItems.getHeight();
+		
+		for (int x = 0; x < columns; x++) {
+			for (int y = 0; y < rows; y++) {
+				TiledMapTileLayer.Cell cell = layerTrigger.getCell(x, y);
+				if (cell != null) {
+					TiledMapTile tile = cell.getTile();
+					if (tile.getProperties().containsKey("sniper")) {
+						setPlayerTarget(new Node(x, y));
+						return;
+					}
+				}				
+			}
+		}
+	}	
 
 	public boolean[][] getWalls() {
 		return walls;
@@ -106,5 +126,13 @@ public class Map {
 
 	public void setPlayerStart(Node playerStart) {
 		this.playerStart = playerStart;
+	}
+
+	public Node getPlayerTarget() {
+		return playerTarget;
+	}
+
+	public void setPlayerTarget(Node playerTarget) {
+		this.playerTarget = playerTarget;
 	}
 }

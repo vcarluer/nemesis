@@ -12,4 +12,7 @@ public class Npc extends BasicShape {
 		this.name = name;
 	}
 	
+	public void step(float delta) {
+		
+	}	
 }
