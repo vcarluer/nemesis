@@ -3,8 +3,8 @@ package gamers.associate.nemesis.ia;
 import java.util.EnumSet;
 
 public class ActionMoveStay extends Action {	
-	public ActionMoveStay(Npc npc) {
-		super(npc);
+	public ActionMoveStay(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		// TODO Auto-generated constructor stub
 	}
 

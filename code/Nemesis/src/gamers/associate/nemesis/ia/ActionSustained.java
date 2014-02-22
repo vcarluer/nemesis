@@ -1,8 +1,8 @@
 package gamers.associate.nemesis.ia;
 
 public abstract class ActionSustained extends Action {
-	public ActionSustained(Npc npc) {
-		super(npc);
+	public ActionSustained(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		// TODO Auto-generated constructor stub
 	}
 

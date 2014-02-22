@@ -4,8 +4,8 @@ import java.util.EnumSet;
 
 public class ActionIdle extends Action {
 
-	public ActionIdle(Npc npc) {
-		super(npc);
+	public ActionIdle(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		// TODO Auto-generated constructor stub
 	}
 

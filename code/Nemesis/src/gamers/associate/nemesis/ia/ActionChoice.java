@@ -38,11 +38,11 @@ public class ActionChoice {
 			positionAction.step(delta);
 		}
 		
-		if (handsAction != null) {
+		if (handsAction != null && handsAction != positionAction) {
 			handsAction.step(delta);
 		}
 		
-		if (headAction != null) {
+		if (headAction != null && headAction != handsAction && headAction != positionAction) {
 			headAction.step(delta);
 		}
 	}

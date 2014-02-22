@@ -18,13 +18,15 @@ public abstract class Action {
 	protected float animationValue; // 0 if instant type
 	protected float currentValue;
 	protected List<Action> childActions;
+	protected Action parentAction;
 	
-	public Action(Npc npc) {
+	public Action(Npc npc, Action parentAction) {
 		conditions = new ArrayList<IAssert>();	
 		exitConditions = new ArrayList<IAssert>();
 		childActions = new ArrayList<Action>();
 		bodyConstraints = createBodyConstraints();
 		this.npc = npc;
+		this.parentAction = parentAction;
 	}
 	
 	// Return true if 
@@ -58,7 +60,7 @@ public abstract class Action {
 			} else {
 				// If a higher level move to do is known cancel other actions to move
 				if (choice.getPositionAction() == null && bodyConstraints.contains(BodyConstraint.Position)) {
-					choice.setPositionAction(new ActionMoveStay(npc));
+					choice.setPositionAction(new ActionMoveStay(npc, this));
 				}
 			}
 		}
@@ -72,5 +74,14 @@ public abstract class Action {
 		}
 		
 		return ok;
+	}
+	
+	public void notifyActionEnd(Action action) {		
+	}
+	
+	protected void notifyEndToParent() {
+		if (parentAction != null) {
+			parentAction.notifyActionEnd(this);
+		}
 	}
 }

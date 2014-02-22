@@ -4,8 +4,8 @@ import java.util.EnumSet;
 
 public class ActionDontMoveYourHands extends Action {
 
-	public ActionDontMoveYourHands(Npc npc) {
-		super(npc);
+	public ActionDontMoveYourHands(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		// TODO Auto-generated constructor stub
 	}
 

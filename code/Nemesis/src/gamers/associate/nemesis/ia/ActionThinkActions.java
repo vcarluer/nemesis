@@ -1,17 +1,18 @@
 package gamers.associate.nemesis.ia;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public abstract class ActionThinkActions extends ActionSustained {
+public class ActionThinkActions extends ActionSustained {
 	protected List<Action> possibleActions;
-	protected ActionOperator childActionsOperator;
+	private ActionOperator childActionsOperator;
 	protected int thinkComplexity;
 	
-	public ActionThinkActions(Npc npc) {
-		super(npc);
+	public ActionThinkActions(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		possibleActions = createPossibleActions();
-		childActionsOperator = ActionOperator.AND;
+		setChildActionsOperator(ActionOperator.AND);
 		
 		bodyConstraints = EnumSet.of(BodyConstraint.Head);
 		
@@ -25,6 +26,15 @@ public abstract class ActionThinkActions extends ActionSustained {
 	}
 	
 	@Override
+	public void notifyActionEnd(Action action) {
+		super.notifyActionEnd(action);
+		childActions.remove(action);
+		if (childActions.size() == 0) {
+			notifyEndToParent();
+		}
+	}
+
+	@Override
 	protected EnumSet<BodyConstraint> createBodyConstraints() {
 		return EnumSet.of(BodyConstraint.Head);
 	}
@@ -32,13 +42,13 @@ public abstract class ActionThinkActions extends ActionSustained {
 	@Override
 	protected void action() {
 		if (possibleActions.size() > 0) {
-			if (childActionsOperator == ActionOperator.AND) {
+			if (getChildActionsOperator() == ActionOperator.AND) {
 				for (Action action : possibleActions) {
 					childActions.add(action);
 				}
 			}
 			
-			if (childActionsOperator == ActionOperator.OR) {
+			if (getChildActionsOperator() == ActionOperator.OR) {
 				// for now we take always the first strategy
 				childActions.add(possibleActions.get(0));
 			}
@@ -50,5 +60,19 @@ public abstract class ActionThinkActions extends ActionSustained {
 		return npc.getThinkSpeed(); 
 	}
 	
-	protected abstract List<Action> createPossibleActions();
+	protected List<Action> createPossibleActions() {
+		return new ArrayList<Action>();
+	}
+	
+	public void addAction(Action action) {
+		possibleActions.add(action);
+	}
+
+	public ActionOperator getChildActionsOperator() {
+		return childActionsOperator;
+	}
+
+	public void setChildActionsOperator(ActionOperator childActionsOperator) {
+		this.childActionsOperator = childActionsOperator;
+	}
 }

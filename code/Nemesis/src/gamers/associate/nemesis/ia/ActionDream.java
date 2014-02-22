@@ -4,8 +4,8 @@ import java.util.EnumSet;
 
 public class ActionDream extends Action {
 
-	public ActionDream(Npc npc) {
-		super(npc);
+	public ActionDream(Npc npc, Action parentAction) {
+		super(npc, parentAction);
 		// TODO Auto-generated constructor stub
 	}
 

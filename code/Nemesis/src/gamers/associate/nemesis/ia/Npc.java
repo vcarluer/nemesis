@@ -20,7 +20,14 @@ public class Npc extends BasicShape {
 		thinkSpeed = 1000; // 2 actions per second
 		moveSpeed = 5f; // 1 tile per second
 		
-		rootAction = new ActionMove(this, Map.get().getPlayerTarget());
+		// To be replace by dedicated class behavior
+		// If rootAction is a think action actionchoice will return only head behavior (not a pb)
+		ActionThinkActions think = new ActionThinkActions(this, null);
+		ActionMove move = new ActionMove(this, think, Map.get().getPlayerTarget());
+		ActionIdle idle = new ActionIdle(this, think);						
+		think.addAction(move);		
+		think.addAction(idle);
+		rootAction = think;
 		actionChoice = new ActionChoice();
 	}
 	

@@ -13,8 +13,8 @@ public class ActionMove extends ActionSustained {
 	private Vector2 partialTarget;
 	private Vector2 currentPosition;
 	
-	public ActionMove(Npc npc, Vector2 target) {
-		super(npc);
+	public ActionMove(Npc npc, Action parentAction, Vector2 target) {
+		super(npc, parentAction);
 		this.target = target;
 		partialTarget = new Vector2();
 		currentPosition = new Vector2();
@@ -54,7 +54,9 @@ public class ActionMove extends ActionSustained {
 			if (npc.getX() == nextNode.x && npc.getY() == nextNode.y) {
 				path.remove(0);
 			}
-		}	
+		} else {
+			notifyEndToParent();
+		}
 	}
 
 	@Override
