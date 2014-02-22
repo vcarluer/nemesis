@@ -28,7 +28,15 @@ public class ActionChoice {
 	public void render(SpriteBatch batch) {
 		
 		if (positionAction != null) {
-			bitmapFont.draw(batch, positionAction.getId(), 0, CameraManager.get().cam.viewportHeight);
+			bitmapFont.draw(batch, "Move: " + positionAction.getId(), 0, CameraManager.get().cam.viewportHeight);
+		}
+		
+		if (positionAction != null) {
+			bitmapFont.draw(batch, "Hand: " + handsAction.getId(), 0, CameraManager.get().cam.viewportHeight - 1);
+		}
+		
+		if (positionAction != null) {
+			bitmapFont.draw(batch, "Head: " + headAction.getId(), 0, CameraManager.get().cam.viewportHeight - 2);
 		}
 				
 	}

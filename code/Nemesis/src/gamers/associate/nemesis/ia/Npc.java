@@ -14,6 +14,8 @@ public class Npc extends BasicShape {
 	private Action rootAction;
 	private ActionChoice actionChoice;
 	
+	private Memory memory;
+	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
@@ -30,6 +32,8 @@ public class Npc extends BasicShape {
 		think.addAction(idle);
 		rootAction = think;
 		actionChoice = new ActionChoice();
+		
+		memory = new Memory();
 	}
 	
 	
