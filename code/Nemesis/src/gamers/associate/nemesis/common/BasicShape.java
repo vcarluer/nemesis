@@ -1,5 +1,7 @@
 package gamers.associate.nemesis.common;
 
+import gamers.associate.nemesis.map.Map;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,11 +12,15 @@ public abstract class BasicShape extends GameItem {
 
 	public BasicShape(float x, float y, float width, float height, Color color) { 
 		super(x, y);
+		
 		rect = new Rectangle(x, y, width, height);
 		this.color = color;
 	}
 	
 	public void render(ShapeRenderer renderer) {
+		rect.x = this.getX() + 1 / 2f - rect.width / 2f;		
+		rect.y = this.getY() + 1 / 2f;
+		
 		renderer.setColor(color);
 		renderer.rect(rect.x, rect.y, rect.width, rect.height);
 	}

@@ -3,6 +3,7 @@ package gamers.associate.nemesis.ia;
 import com.badlogic.gdx.graphics.Color;
 
 import gamers.associate.nemesis.common.BasicShape;
+import gamers.associate.nemesis.map.Map;
 
 public class Npc extends BasicShape {
 	private String name;	
@@ -15,7 +16,11 @@ public class Npc extends BasicShape {
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
-		rootAction = new ActionIdle(this);
+		
+		thinkSpeed = 1000; // 2 actions per second
+		moveSpeed = 5f; // 1 tile per second
+		
+		rootAction = new ActionMove(this, Map.get().getPlayerTarget());
 		actionChoice = new ActionChoice();
 	}
 	

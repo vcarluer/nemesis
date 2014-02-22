@@ -25,7 +25,6 @@ public class NemesisGame implements ApplicationListener {
 	/*private Texture texture;
 	private Sprite sprite;*/
 	private ShapeRenderer shapeRenderer;
-	private Map map;
 	private Director director;
 		
 	@Override
@@ -49,9 +48,8 @@ public class NemesisGame implements ApplicationListener {
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);*/
 		
 		shapeRenderer = new ShapeRenderer();
-		
-		map = new Map();
-		director = new Director(map);
+				
+		director = new Director(Map.get());
 	}
 
 	@Override
@@ -72,13 +70,14 @@ public class NemesisGame implements ApplicationListener {
 		
 		/*batch.begin();
 		sprite.draw(batch);
-		batch.end();*/		
+		batch.end();*/				
+		Map.get().renderFloor(camera.cam);
 		shapeRenderer.setProjectionMatrix(camera.cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		map.renderFloor(camera.cam);
 		director.render(shapeRenderer);
-		map.renderFront();
 		shapeRenderer.end();
+		Map.get().renderFront();
+		
 		
 	}
 

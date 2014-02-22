@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 public class Director {
 	private List<Npc> npcs;
@@ -32,7 +33,7 @@ public class Director {
 	}
 	
 	private void initNpcs() {
-		Node pos = this.map.getPlayerStart();
+		Vector2 pos = this.map.getPlayerStart();
 		shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");
 		npcs.add(shoty);
 	}

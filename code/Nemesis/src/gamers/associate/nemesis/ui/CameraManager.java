@@ -1,5 +1,7 @@
 package gamers.associate.nemesis.ui;
 
+import gamers.associate.nemesis.map.Map;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -22,8 +24,8 @@ public class CameraManager implements ApplicationListener {
         float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
-        cam = new OrthographicCamera(w / 32f, h / 32f);        
-        cam.translate(w / 64f, h / 64f);
+        cam = new OrthographicCamera(w / Map.TILE_SIZE, h / Map.TILE_SIZE);        
+        cam.translate(w / (2 * Map.TILE_SIZE), h / (2 * Map.TILE_SIZE));
         cam.update();
 
     }

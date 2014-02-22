@@ -8,11 +8,12 @@ public abstract class ActionSustained extends Action {
 
 	@Override
 	public void step(float delta) {
-		currentValue = delta * getSpeed();
-		if (currentValue > animationValue) {
+		currentValue += delta * getSpeed();
+		
+		if (currentValue > (preAnimationValue + animationValue)) {
 			action();
 		}
-	}		
+	}	
 
 	protected abstract float getSpeed();
 	

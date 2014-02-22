@@ -6,7 +6,8 @@ public class GameItem {
 	private float y;
 	
 	public GameItem(float x, float y) {
-		
+		setX(x);
+		setY(y);
 	}
 	
 	public String getId() {

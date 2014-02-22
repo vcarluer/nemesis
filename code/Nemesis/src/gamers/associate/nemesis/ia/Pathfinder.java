@@ -6,7 +6,7 @@ import java.util.List;
 // Taken from https://github.com/xSmallDeadGuyx/SimpleAStar
 public class Pathfinder {
 	
-	public static boolean canCutCorners = true;
+	public static boolean canCutCorners = false;
 	
 	private static Node end;
 	private static int[][] gScore;
