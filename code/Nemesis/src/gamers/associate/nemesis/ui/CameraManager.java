@@ -17,9 +17,17 @@ public class CameraManager implements ApplicationListener {
     public	OrthographicCamera  cam;
     private float               rotationSpeed;
 
+    private static CameraManager cameraManager;
     
+    public static CameraManager get() {
+    	if (cameraManager == null) {
+    		cameraManager = new CameraManager();
+    	}
+    	
+    	return cameraManager;
+    }
     
-    public CameraManager() {
+    protected CameraManager() {
         rotationSpeed = 0.5f;
         float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();

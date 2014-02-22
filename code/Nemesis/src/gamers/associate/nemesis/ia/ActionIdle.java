@@ -6,7 +6,7 @@ public class ActionIdle extends Action {
 
 	public ActionIdle(Npc npc, Action parentAction) {
 		super(npc, parentAction);
-		// TODO Auto-generated constructor stub
+		setId("Idle");
 	}
 
 	@Override

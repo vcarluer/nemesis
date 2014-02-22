@@ -18,6 +18,7 @@ public class ActionMove extends ActionSustained {
 		this.target = target;
 		partialTarget = new Vector2();
 		currentPosition = new Vector2();
+		setId("Move");
 	}
 	
 	@Override

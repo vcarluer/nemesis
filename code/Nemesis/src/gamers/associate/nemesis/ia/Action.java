@@ -7,7 +7,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public abstract class Action {
-	protected String id;	
+	private String id;	
 	protected Npc npc;
 	protected EnumSet<BodyConstraint> bodyConstraints;
 	protected boolean Repeatable;
@@ -83,5 +83,13 @@ public abstract class Action {
 		if (parentAction != null) {
 			parentAction.notifyActionEnd(this);
 		}
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

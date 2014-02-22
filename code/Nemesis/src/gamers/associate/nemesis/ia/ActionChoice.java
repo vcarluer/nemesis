@@ -1,9 +1,38 @@
 package gamers.associate.nemesis.ia;
 
+import gamers.associate.nemesis.map.Map;
+import gamers.associate.nemesis.ui.CameraManager;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class ActionChoice {
 	private Action positionAction;
 	private Action handsAction;
 	private Action headAction;
+	private BitmapFont bitmapFont;
+	private static String fontName = "baveuse";
+	
+	public ActionChoice() {		
+		bitmapFont = new BitmapFont(
+				Gdx.files.internal("data/" + fontName + ".fnt"), 
+				Gdx.files.internal("data/" + fontName + ".png"), 
+				false);
+		
+		// Should instead use dedicated font at proper size?
+		bitmapFont.setUseIntegerPositions(false);
+		bitmapFont.setScale(1 / Map.TILE_SIZE);
+	}
+	
+	public void render(SpriteBatch batch) {
+		
+		if (positionAction != null) {
+			bitmapFont.draw(batch, positionAction.getId(), 0, CameraManager.get().cam.viewportHeight);
+		}
+				
+	}
+	
 	public Action getPositionAction() {
 		return positionAction;
 	}

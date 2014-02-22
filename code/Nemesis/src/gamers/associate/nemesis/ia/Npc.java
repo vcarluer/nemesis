@@ -1,6 +1,7 @@
 package gamers.associate.nemesis.ia;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import gamers.associate.nemesis.common.BasicShape;
 import gamers.associate.nemesis.map.Map;
@@ -31,6 +32,8 @@ public class Npc extends BasicShape {
 		actionChoice = new ActionChoice();
 	}
 	
+	
+	
 	public void step(float delta) {
 		actionChoice.reset();
 		if (rootAction != null) {
@@ -54,5 +57,9 @@ public class Npc extends BasicShape {
 
 	public void setMoveSpeed(float moveSpeed) {
 		this.moveSpeed = moveSpeed;
+	}
+
+	public void render(SpriteBatch batch) {
+		actionChoice.render(batch);
 	}	
 }

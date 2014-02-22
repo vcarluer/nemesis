@@ -33,7 +33,7 @@ public class NemesisGame implements ApplicationListener {
 		float h = Gdx.graphics.getHeight();
 		
 		
-		camera = new CameraManager();
+		camera = CameraManager.get();
 		
 		batch = new SpriteBatch();
 		
@@ -62,23 +62,24 @@ public class NemesisGame implements ApplicationListener {
 	public void render() {
 		
 		camera.render();
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	
 		director.step(Gdx.graphics.getDeltaTime());
-		//batch.setProjectionMatrix(camera.cam.combined);
-		
-		/*batch.begin();
-		sprite.draw(batch);
-		batch.end();*/				
+		batch.setProjectionMatrix(camera.cam.combined);
+				
 		Map.get().renderFloor(camera.cam);
+		
 		shapeRenderer.setProjectionMatrix(camera.cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		director.render(shapeRenderer);
 		shapeRenderer.end();
+		
 		Map.get().renderFront();
 		
-		
+		batch.begin();
+		director.render(batch);
+		batch.end();		
 	}
 
 	@Override
