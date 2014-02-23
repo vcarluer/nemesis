@@ -24,4 +24,12 @@ public abstract class BasicShape extends GameItem {
 		renderer.setColor(color);
 		renderer.rect(rect.x, rect.y, rect.width, rect.height);
 	}
+	
+	public float getWidth(){
+		return this.rect.width;
+	}
+	
+	public float getHeight(){
+		return this.rect.height;
+	}
 }
