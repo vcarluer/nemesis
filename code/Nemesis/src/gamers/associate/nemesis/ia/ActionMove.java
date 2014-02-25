@@ -2,13 +2,14 @@ package gamers.associate.nemesis.ia;
 
 import gamers.associate.nemesis.map.Map;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
 public class ActionMove extends ActionSustained {
-	private List<Node> path;
+	private List<Vector2> path;
 	private Vector2 target;
 	private Vector2 partialTarget;
 	private Vector2 currentPosition;
@@ -27,11 +28,27 @@ public class ActionMove extends ActionSustained {
 		if (path == null) {
 			Node moveTarget = new Node((int) target.x, (int) target.y);
 			Node moveStart = new Node((int) npc.getX(), (int) npc.getY());
-			path = Pathfinder.generate(moveStart, moveTarget, Map.get().getWalls());
+			List<Node> nodes = Pathfinder.generate(moveStart, moveTarget, Map.get().getWalls());
+			if (nodes.size() > 0) {
+				// Remove the first node, it is the npc position
+				nodes.remove(0);
+				// Remove the last node, it will be replaced by real target. Sometime move cab be buggy if last is moved
+				if (nodes.size() > 0) {
+					nodes.remove(nodes.size() - 1);
+				}
+				
+				// temp list copy for now until pathfinder work on float?
+				path = new ArrayList<Vector2>();
+				for (Node node : nodes) {
+					path.add(new Vector2(node.x, node.y));
+				}
+				
+				path.add(target);
+			}
 		}
 		
 		if (path != null && path.size() > 0) {
-			Node nextNode = path.get(0);
+			Vector2 nextNode = path.get(0);
 			partialTarget.x = nextNode.x;
 			partialTarget.y = nextNode.y;
 			currentPosition.x = npc.getX();

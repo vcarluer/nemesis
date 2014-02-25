@@ -18,8 +18,8 @@ public abstract class BasicShape extends GameItem {
 	}
 	
 	public void render(ShapeRenderer renderer) {
-		rect.x = this.getX() + 1 / 2f - rect.width / 2f;		
-		rect.y = this.getY() + 1 / 2f;
+		rect.x = this.getX() - rect.width / 2f;		
+		rect.y = this.getY() - rect.height / 2f;
 		
 		renderer.setColor(color);
 		renderer.rect(rect.x, rect.y, rect.width, rect.height);

@@ -92,4 +92,8 @@ public abstract class Action {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public void cancelAction() {
+		this.notifyEndToParent();
+	}
 }

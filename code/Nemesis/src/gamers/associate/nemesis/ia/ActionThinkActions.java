@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class ActionThinkActions extends ActionSustained {
+public abstract class ActionThinkActions extends ActionSustained {
 	protected List<Action> possibleActions;
-	private ActionOperator childActionsOperator;
 	protected int thinkComplexity;
 	
 	public ActionThinkActions(Npc npc, Action parentAction) {
 		super(npc, parentAction);
 		possibleActions = createPossibleActions();
-		setChildActionsOperator(ActionOperator.AND);
 		
 		bodyConstraints = EnumSet.of(BodyConstraint.Head);
 		
@@ -40,22 +38,6 @@ public class ActionThinkActions extends ActionSustained {
 	}
 	
 	@Override
-	protected void action() {
-		if (possibleActions.size() > 0) {
-			if (getChildActionsOperator() == ActionOperator.AND) {
-				for (Action action : possibleActions) {
-					childActions.add(action);
-				}
-			}
-			
-			if (getChildActionsOperator() == ActionOperator.OR) {
-				// for now we take always the first strategy
-				childActions.add(possibleActions.get(0));
-			}
-		}	
-	}
-
-	@Override
 	protected float getSpeed() {
 		return npc.getThinkSpeed(); 
 	}
@@ -66,13 +48,5 @@ public class ActionThinkActions extends ActionSustained {
 	
 	public void addAction(Action action) {
 		possibleActions.add(action);
-	}
-
-	public ActionOperator getChildActionsOperator() {
-		return childActionsOperator;
-	}
-
-	public void setChildActionsOperator(ActionOperator childActionsOperator) {
-		this.childActionsOperator = childActionsOperator;
 	}
 }

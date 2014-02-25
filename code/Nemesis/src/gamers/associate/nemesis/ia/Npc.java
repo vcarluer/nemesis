@@ -11,10 +11,12 @@ public class Npc extends BasicShape {
 	private float thinkSpeed;
 	private float moveSpeed;
 	
-	public Action rootAction;
+	public ActionMultiplexer rootAction;
 	public ActionChoice actionChoice;
 	
 	private Memory memory;
+	
+	protected boolean writeChoices;
 	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -23,24 +25,23 @@ public class Npc extends BasicShape {
 		thinkSpeed = 1000; // 2 actions per second
 		moveSpeed = 5f; // 1 tile per second
 		
+		rootAction = new ActionMultiplexer(this, null);
+		ActionIdle idle = new ActionIdle(this, rootAction);
+		rootAction.addAction(idle);
 		
 		actionChoice = new ActionChoice();
 		memory = new Memory();
 		
 	}
 	
-	public void create(){
-		// To be replace by dedicated class behavior
-		// If rootAction is a think action actionchoice will return only head behavior (not a pb)
-		ActionThinkActions think = new ActionThinkActions(this, null);
-		ActionMove move = new ActionMove(this, think, Map.get().getPlayerTarget());
-		ActionIdle idle = new ActionIdle(this, think);						
-		think.addAction(move);		
-		think.addAction(idle);
-		rootAction = think;
-		
+	public void create(){ 
+		ActionMove move = new ActionMove(this, rootAction, Map.get().getPlayerTarget());
+		rootAction.addAction(move);
 	}
 	
+	public void notifyActionEnd(Action action) {
+		
+	}
 	
 	public void step(float delta) {
 		actionChoice.reset();
@@ -68,6 +69,8 @@ public class Npc extends BasicShape {
 	}
 
 	public void render(SpriteBatch batch) {
-		actionChoice.render(batch);
+		if (writeChoices) {
+			actionChoice.render(batch);
+		}
 	}	
 }

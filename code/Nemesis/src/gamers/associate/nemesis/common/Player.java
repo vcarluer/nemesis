@@ -1,16 +1,15 @@
 package gamers.associate.nemesis.common;
 
+import gamers.associate.nemesis.ia.Action;
+import gamers.associate.nemesis.ia.ActionMove;
+import gamers.associate.nemesis.ia.Npc;
+import gamers.associate.nemesis.map.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-
-import gamers.associate.nemesis.ia.ActionIdle;
-import gamers.associate.nemesis.ia.ActionMove;
-import gamers.associate.nemesis.ia.ActionThinkActions;
-import gamers.associate.nemesis.ia.Npc;
-import gamers.associate.nemesis.map.Map;
 
 public class Player extends Npc implements  InputProcessor {
 
@@ -19,11 +18,8 @@ public class Player extends Npc implements  InputProcessor {
 		super(x, y, width, height, color, name);
 		// TODO Auto-generated constructor stub
 		Gdx.input.setInputProcessor(this);
-		ActionThinkActions think = new ActionThinkActions(this, null);
-		ActionIdle idle = new ActionIdle(this, think);						
-		think.addAction(idle);
-		rootAction = think;
 		
+		writeChoices = true;
 	}
 
 	@Override
@@ -44,6 +40,8 @@ public class Player extends Npc implements  InputProcessor {
 		return false;
 	}
 
+	private Action rightClickAction;
+	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		
@@ -52,19 +50,26 @@ public class Player extends Npc implements  InputProcessor {
 		if(button == Buttons.RIGHT){
             posX = (screenX - this.getWidth()/2)/ Map.TILE_SIZE;
             posY = (Gdx.graphics.getHeight() - screenY - this.getHeight()/2)/Map.TILE_SIZE;
-            ActionThinkActions think = new ActionThinkActions(this, null);
-            ActionMove move = new ActionMove(this, think, new Vector2(posX, posY));
-            //Vector2 vec = new Vector2();
-            //vec = Map.get().getPlayerTarget();
-            //ActionMove move = new ActionMove(this, think, Map.get().getPlayerTarget());
+
             
-            ActionIdle idle = new ActionIdle(this, think);						
-    		think.addAction(move);		
-    		think.addAction(idle);
-    		rootAction = think;
+            if (rightClickAction != null) {
+            	rightClickAction.cancelAction();
+            }
+            
+            rightClickAction = new ActionMove(this, rootAction, new Vector2(posX, posY));						
+    		rootAction.addAction(rightClickAction);
+    		
         }
         
         return false;
+	}
+	
+	@Override
+	public void notifyActionEnd(Action action) {
+		super.notifyActionEnd(action);
+		if (action == rightClickAction) {
+			rightClickAction = null;
+		}
 	}
 
 	@Override
