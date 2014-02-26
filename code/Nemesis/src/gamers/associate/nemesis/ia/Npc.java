@@ -17,6 +17,7 @@ public class Npc extends BasicShape {
 	private Memory memory;
 	
 	protected boolean writeChoices;
+	protected int memorySize;
 	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -30,7 +31,8 @@ public class Npc extends BasicShape {
 		rootAction.addAction(idle);
 		
 		actionChoice = new ActionChoice();
-		memory = new Memory();
+		memorySize = 100;
+		memory = new Memory(memorySize);
 		
 	}
 	

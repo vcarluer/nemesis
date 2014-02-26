@@ -5,16 +5,17 @@ import java.util.List;
 
 public class Memory {
 	private List<MemoryItem> items;
+	private int memorySize;
 
-	public Memory() {
+	public Memory(int size) {
 		items = new ArrayList<MemoryItem>();
+		memorySize = size;
 	}
 	
-	public List<MemoryItem> getItems() {
-		return items;
-	}
-
-	public void setItems(List<MemoryItem> items) {
-		this.items = items;
-	}
+	public void addItem(MemoryItem item) {
+		items.add(0, item);
+		if (items.size() > memorySize) {
+			items.remove(items.size() - 1);
+		}
+	}	
 }
