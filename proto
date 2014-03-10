@@ -1,0 +1,242 @@
+Le proto est un projet minimal mettant en place chaque élément de gameplay pour aider à les définir.
+Le scénario est le suivant :
+Le joueur doit empêcher l'assassinat d'un scientifique: Scott McTarget.
+
+Lieux : 
+Une pièce d'un laboratoire
+un couloir
+un entrepot
+
+Le joueur commence dans l'entrepôt, non déguisé
+
+PNJ : 
+Plusieurs scientifiques
+Des gardes
+L'assassin
+La cible
+
+Objets :
+Déguisement scientifique
+Machine à café
+Poison
+
+Stratégies d'assasinat
+Empoisonner son café
+Attend qu'un scientifique aille à l'entrepôt (pas forcément le premier)
+récupère le poison
+Attend qu'il faille refaire le café
+Verse le poison
+
+
+Compétences perso
+Intérroger
+Neutraliser
+
+Compétence guarde
+Arrêter
+
+Code :
+Se déplacer vers un point (OK)
+Dessiner z order
+Observer
+Dialogue
+Prendre un objet
+Utiliser un objet
+Regarder un objet
+Système de salle / zone
+Brouillard de guerre
+Ray casting (?)
+Multiplayer (?)
+
+Sprites * 4 (haut bas gauche droite)
+* Scientifique
+Observe
+Se déplace
+Prend un café
+Travail
+Prend un objet
+Prépare le café
+
+* Guarde
+Observe
+Se déplace
+Arrête
+
+Assassin
+Comme scientifique
++ verse poison 
+
+PJ
+Idle
+Se déplace
+Neutraliste
+
+Map
+Laboratoire
+Entrepôt
+Couloir
+Chaise
+Appareil scientifique
+Table
+Plante verte
+Machine à café
+Tableau blanc
+Armoire de stockage
+Porte
+Murs
+Sols
+Porte
+Porte qui s'ouvre / ferme
+
+Audio
+Dialogues
+Prend objet
+Utilise machine scientifique (laser?)
+Déplacement
+Ferme les menottes
+Assome
+Meurt empoisoné
+Tombe dans les pommes
+
++ tous les dialogues
+
+Style graphique : 8 bits
+Input : souris
+Timing : 5 mn max.
+Game over si assassin arrêté ou réussis assassinat
+
+caméra :
+Vue de dessus suivis
+Vue de dessus fixe par pièce
+Vue de dessus libre
+Vu libre / de côté
+
+=> Vue de dessus.
+fixe par pièce : pas de ray casting / brouillard naturel
+pas de suivis : intérêt si on peut voir autre chose que ce que vois le perso => Pas de brouillard / multi perso
+Suivis : Ne fait pas trop jeu d'aventure
+vue de côté : trop compliqué à faire ? Pas de brouillard
+brouillard avec suivis : n'apporte pas grand chose par rapport au fixe par pièce, éventuellement le fait d'avoir une meilleure impression d'un grand niveau.
+Par pièce => 'Oblige' à rendre chaque pièce un peu intéressante
+
+==> Vue de dessus, par pièce, pas de suivis, pas de déplacement de caméra
+Nouvelle pièce, la pièce apparaît.
+4 solutions ensuite:
+a * L'ancienne se grise, la caméra se centre sur la nouvelle pièce
+b * La nouvelle pièces remplace l'ancienne à l'écran
+c * La nouvelle pièce apparaît à côté et le personnage d'y déplace. La caméra n'est recentré que si on s'approche des bords de l'écran.
+d * Zone = 1 écran. 1 zone contient plusieurs pièces. Les pièces découvertes sont grisé. Celles visibles non grisé. Les non découvertes, fond noir. Changement de zone = solution b. Dans la même zone = la pièce apparaît, pas de mouvement de caméra.
+
+Solution a permet de visualiser plus facilement ou l'on va, donne un effet d'ensemble. Vu dans dungeon of the endless. Peut faire bizarre + déplacement / animation auto changement de salle / Freeze du temps.
+solution b focus plus le jeu, donne un côté plus clostrophobe, old school. Pas obligé de faire une map complète, juste les pièces, plus simple. Se rapproche plus du jeu d'aventure.
+La solution c peut être perturbante. De plus le rendu peut changer en fonction des pièces découvertes et être inconsistant. Difficile à suivre.
+La solution d est old school mais mixe les avantages des solution a et b : On visualise mieux ou on va, le joueur et focus, sans les inconvénients de la b : Pas de déplacement de caméra.
+
+==> 1 zone = 1 écran. 1 zone contient plusieurs pièces. Lorqu'une zone en remplace une autre, tout est redéssiné.
+
+Pour le proto : 1 zone.
+
+Système de dialogue
+2 solutions :
+En bulle, interaction old school monkey island ou autre
+En surimpression rpg japonais
+
+L'avantage de la solution bulle c'est qu'elle permet de mettre sur un même écran un dialogue interractif et les dialogues / sons des npcs. Ca peut faire brouillon.
+L'avantage de la surimpression et que ca fait un focus sur les personnage intéressant pour la narraton. cela coupe des autres choses qui se passent et coupe l'action, ac demande plus de boulot graphique
+
+Il y a la possibilité de mixer les deux dialogues libre / dialogue PJ mais ça donne plus de boulot et ne fait pas très propre.
+Le côté temps réel ne se prête pas bien au mode rpg
+=> Bulle de dialogue, réponse possible dans une bulle également.
+
+
+Non pris en compte dans le proto
+gui inventaire si pas de multiplayer
+création de perso
+système relationnel ?
+
+
+Bon et qu'est-ce qu'on fait maintenant ?
+Le problème est que tout ça c'est bien jolie mais ça ne représente pas le gameplay particulier que j'aimerai donné au jeu.
+Le but est dévoir les même sensations que dans un hack n slash ou un dota 2 : combo, cooldown et précision...
+Pour ce faire le joueur doit avoir des capacités qui sortent de l'ordinaire (ou pas ?) mais surtout qu'elles soient timé.
+donc...
+capa durée / cooldown / psy (/100) :
+- Invisibilité 10 / 30 / 50
+(- True sight items 8 / 45 / 25)
+- Gunner 5 / 15 / 25
+- Serum de vérité / barratineur 15 / 25 / 15
+(- Ulti : Vision globale 10 / 60 / 35)
+
+La déja ca va mieux.
+
+vie = 100 aussi
+vie régénère 1hp / s
+psy régénère 1 pp / s
+
+dégats = arme + bonus
+
+l'xp augmente toute seul au fur et à mesure.
+L'utilisation de capactés donne de l'xp.
+l'xp permet d'acheter des capacités
+
+Difficulté proto:
+garde empêche de se déplacer dans l'entrepot sans etre vue => Invisibilité, ou tiré ou barratineur
+
+=> suffisant pour proto!
+
+Donc:
+Garde
+Observer
+Parler
+Tirer
+(déplacer)
+
+pj
+Parler
+Tirer
+Déplacer
+(Devient invisible)
+Utilisé capacité
+
+Sons
+Parler
+Déplacer
+Tirer
+Utiliser capacité
+Blesser
+
+Objet
+Arme
+
+Objectif
+Sortir de la pièce
+
+graphisme map
+entrepôt
+barre de vie
+barre de psy
+Mini portrait ?
+
+
+Map
+__________________________________________________
+|               EEEEEEE  EEEEEEEEEEE EEEE        |
+|     T                                         E|
+| U   G         EEEEEEEEEEEEEEEEGEEEEEE         E|
+|     T                                          |
+X               EEEEEEEEEEEEEEEEEEE   EEEE     PI|
+|                                                |
+|                                               E|
+|               EEE  EEEEEEEEEEE TTTGT TTT TTT  E|
+|                                                |
+|________________________________________________|
+      EEEEEEEEEEEEEEE EEEEEEEEEEE   EEEEEEEEEEEEE 
+
+______
+|    |   hp: 10/100
+|    |   pp: 50/100
+|    |
+______
+
+
+           
