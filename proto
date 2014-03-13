@@ -239,4 +239,27 @@ ______
 ______
 
 
+
+Reste, un système de dialogue dynamique
+Les dialogues sont le problème principal d'un jeu d'aventure action en temps réel.
+
+Soit les dialogues arrête le jeu autours le temps pour le joueur de lire et choisir ses réponse sans le pénalisé
+Cela permet d'avoir des dialogues assez fournit en terme de choix, c.a.d que chaque choix peut contenir éventuellement beaucoup de texte.
+Cela est un code du jeu d'aventure et rassure le joueur, cela créé une pause dans le jeu et sépare de manière artificiel entre aventure et action.
+
+Soit les dialogues continuent durant la partie. C'est un système qui n'existe pas tant que ça, ou en tout cas dans un lieu / moment succeptible d'avoir de l'action.
+Les phrases doivent être courtes et compréhensibles.
+La réponse doit être rapidement accessible sans faire sortir le curseur de la zone d'action pour éviter de pénaliser le joueur.
+
+Déjà dit plus haut, il y a 2 façon types d'écrre les dialogues, en bulle ou en surimpression.
+La surinpression correspond plus à la première méthode de dialogue (même si des bulles peuvent etre utilisées).
+Les bulles correspondent à la deuxième méthode.
+
+Le parti pris est plutôt de partir sur des dialogues qui n'arrêtent pas le jeu.
+Proposition : Bulle de dialogue pour le pnj. Bulle de dialogue avec choix simples pour le joueur.
+
+Pour ajouté un côté action au dialogue il est possible d'ajouter une sorte de bar de progression qui oblige le joueur à choisir une réponse, sinon une au hazard ou une par défaut un peu nulle est prise.
+
+La limite est que les phrases risque d'être un peu simple, pas super pour une ambiance de jeu d'aventure.
+Il faut géré les interruptions pendant le dialogue.
            
