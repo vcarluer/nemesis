@@ -6,18 +6,19 @@ import gamers.associate.nemesis.common.Player;
 import gamers.associate.nemesis.ia.Npc;
 import gamers.associate.nemesis.ui.CameraManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class World {
+public class World implements Serializable {
 	private List<GameItem> items;
 	private Player player;
-	private List<Npc> npcs;
-	private List<Wall> walls;
-	private List<GameItem> dynamicItems;
+	private List<Npc> npcs;	
+	private HashMap<String, GameItem> dynamicItems;
 	private List<BasicShape> targetableItems;
 	
 	private static World world;
@@ -33,8 +34,7 @@ public class World {
 	private World() {
 		items = new ArrayList<GameItem>();
 		npcs = new ArrayList<Npc>();
-		walls = new ArrayList<Wall>();
-		dynamicItems = new ArrayList<GameItem>();
+		setDynamicItems(new HashMap<String, GameItem>());
 		targetableItems = new ArrayList<BasicShape>();
 	}
 	
@@ -50,18 +50,13 @@ public class World {
 		this.addItem(player);
 		this.addTargetableItem(player);
 	}
-	
-	public void addWall(Wall wall) {
-		this.walls.add(wall);
-		this.addItem(wall);
-	}
-	
+		
 	private void addItem(GameItem item) {
 		items.add(item);
 	}		
 	
 	private void addDynamicItem(GameItem item) {
-		dynamicItems.add(item);
+		getDynamicItems().put(item.getId(), item);
 	}
 	
 	private void addTargetableItem(BasicShape item) {
@@ -86,5 +81,13 @@ public class World {
 		pos.x = CameraManager.get().getX() + (screenX / Map.TILE_SIZE);
 		pos.y = CameraManager.get().getY() + ((Gdx.graphics.getHeight() - screenY) / Map.TILE_SIZE);
 		return pos;
+	}
+
+	public HashMap<String, GameItem> getDynamicItems() {
+		return dynamicItems;
+	}
+
+	public void setDynamicItems(HashMap<String, GameItem> dynamicItems) {
+		this.dynamicItems = dynamicItems;
 	}
 }

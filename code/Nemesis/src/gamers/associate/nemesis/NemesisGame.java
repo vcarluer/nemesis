@@ -2,8 +2,8 @@ package gamers.associate.nemesis;
 
 import gamers.associate.nemesis.ia.Director;
 import gamers.associate.nemesis.map.Map;
-import gamers.associate.nemesis.map.Room;
 import gamers.associate.nemesis.ui.CameraManager;
+import gamers.associate.nemesis.ui.Renderer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -72,7 +72,7 @@ public class NemesisGame implements ApplicationListener {
 		
 		shapeRenderer.setProjectionMatrix(camera.cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		director.render(shapeRenderer);
+		Renderer.get().render(shapeRenderer);
 		shapeRenderer.end();
 		
 		Map.get().renderFront();

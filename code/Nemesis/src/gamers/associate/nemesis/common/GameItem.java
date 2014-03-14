@@ -1,11 +1,15 @@
 package gamers.associate.nemesis.common;
 
-public class GameItem {
+import java.io.Serializable;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class GameItem implements Serializable {
 	private String id;
-	private float x;
-	private float y;
+	private Vector2 pos;
 	
 	public GameItem(float x, float y) {
+		pos = new Vector2();
 		setX(x);
 		setY(y);
 	}
@@ -17,15 +21,19 @@ public class GameItem {
 		this.id = id;
 	}
 	public float getX() {
-		return x;
+		return pos.x;
 	}
 	public void setX(float x) {
-		this.x = x;
+		this.pos.x = x;
 	}
 	public float getY() {
-		return y;
+		return pos.y;
 	}
 	public void setY(float y) {
-		this.y = y;
+		this.pos.y = y;
+	}
+	
+	public Vector2 getPos() {
+		return pos;
 	}
 }

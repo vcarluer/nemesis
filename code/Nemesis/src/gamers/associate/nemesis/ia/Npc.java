@@ -20,7 +20,7 @@ public class Npc extends BasicShape {
 	protected int memorySize;
 	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
-		super(x, y, width, height, color);
+		super(x, y, width, height);
 		this.name = name;
 		
 		thinkSpeed = 1000; // 2 actions per second

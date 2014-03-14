@@ -96,11 +96,10 @@ public class Player extends Npc implements  InputProcessor {
 			this.target = World.get().getTarget(screenX, screenY);
 			if (this.target != null) {
 				this.target.setTargeted(true);
-			}
-			
-			if (this.currentAction != null) {
-				this.currentAction.Do(this.target);
-			}
+				if (this.currentAction != null) {
+					this.currentAction.Do(this.target);
+				}
+			}					
 		}
         
         return false;
