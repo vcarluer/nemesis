@@ -1,9 +1,11 @@
 package gamers.associate.nemesis.ia;
 
+import java.io.Serializable;
+
 import gamers.associate.nemesis.common.GameItem;
 
 // Memory item is a snapshot of GameItem
-public class MemoryItem {
+public class MemoryItem implements Serializable {
 	private String id;
 	private long memoryStamp;
 	private float memorizedX;

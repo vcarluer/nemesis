@@ -1,46 +1,12 @@
 package gamers.associate.nemesis.ia;
 
-import gamers.associate.nemesis.map.Map;
-import gamers.associate.nemesis.ui.CameraManager;
+import java.io.Serializable;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-public class ActionChoice {
+public class ActionChoice implements Serializable {
 	private Action positionAction;
 	private Action handsAction;
-	private Action headAction;
-	private BitmapFont bitmapFont;
-	private static String fontName = "baveuse";
-	
-	public ActionChoice() {		
-		bitmapFont = new BitmapFont(
-				Gdx.files.internal("data/" + fontName + ".fnt"), 
-				Gdx.files.internal("data/" + fontName + ".png"), 
-				false);
+	private Action headAction;	
 		
-		// Should instead use dedicated font at proper size?
-		bitmapFont.setUseIntegerPositions(false);
-		bitmapFont.setScale(1 / Map.TILE_SIZE);
-	}
-	
-	public void render(SpriteBatch batch) {
-		
-		if (positionAction != null) {
-			bitmapFont.draw(batch, "Move: " + positionAction.getId(), 0, CameraManager.get().cam.viewportHeight);
-		}
-		
-		if (positionAction != null) {
-			bitmapFont.draw(batch, "Hand: " + handsAction.getId(), 0, CameraManager.get().cam.viewportHeight - 1);
-		}
-		
-		if (positionAction != null) {
-			bitmapFont.draw(batch, "Head: " + headAction.getId(), 0, CameraManager.get().cam.viewportHeight - 2);
-		}
-				
-	}
-	
 	public Action getPositionAction() {
 		return positionAction;
 	}

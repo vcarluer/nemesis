@@ -3,22 +3,16 @@ package gamers.associate.nemesis.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Renderer {
 	private List<BasicShapeRenderer> renderers;
-	private static Renderer instance;
-	
-	public static Renderer get() {
-		if (instance == null) {
-			instance = new Renderer();
-		}
+	private List<ActionChoiceRenderer> choiceRenderers;
 		
-		return instance;
-	}
-	
-	protected Renderer() {
+	public Renderer() {
 		renderers = new ArrayList<BasicShapeRenderer>();
+		choiceRenderers = new ArrayList<ActionChoiceRenderer>();
 	}
 	
 	public void render(ShapeRenderer renderer) {
@@ -27,7 +21,17 @@ public class Renderer {
 		}
 	}
 	
+	public void render(SpriteBatch batch) {
+		for (ActionChoiceRenderer choice : choiceRenderers) {
+			choice.render(batch);
+		}
+	}
+	
 	public void add(BasicShapeRenderer renderer) {
 		renderers.add(renderer);
+	}
+	
+	public void add(ActionChoiceRenderer renderer) {
+		choiceRenderers.add(renderer);
 	}
 }

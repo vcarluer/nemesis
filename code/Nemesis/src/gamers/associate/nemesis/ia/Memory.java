@@ -1,9 +1,10 @@
 package gamers.associate.nemesis.ia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Memory {
+public class Memory implements Serializable {
 	private List<MemoryItem> items;
 	private int memorySize;
 

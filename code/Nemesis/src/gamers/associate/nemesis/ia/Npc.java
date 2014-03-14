@@ -12,7 +12,7 @@ public class Npc extends BasicShape {
 	private float moveSpeed;
 	
 	public ActionMultiplexer rootAction;
-	public ActionChoice actionChoice;
+	private ActionChoice actionChoice;
 	
 	private Memory memory;
 	
@@ -21,16 +21,17 @@ public class Npc extends BasicShape {
 	
 	public Npc(float x, float y, float width, float height, Color color, String name) {
 		super(x, y, width, height);
+		this.setId(name);
 		this.name = name;
 		
 		thinkSpeed = 1000; // 2 actions per second
-		moveSpeed = 5f; // 1 tile per second
+		moveSpeed = 1f; // 1 tile per second
 		
 		rootAction = new ActionMultiplexer(this, null);
 		ActionIdle idle = new ActionIdle(this, rootAction);
 		rootAction.addAction(idle);
 		
-		actionChoice = new ActionChoice();
+		setActionChoice(new ActionChoice());
 		memorySize = 100;
 		memory = new Memory(memorySize);
 		
@@ -45,13 +46,14 @@ public class Npc extends BasicShape {
 		
 	}
 	
+	@Override
 	public void step(float delta) {
-		actionChoice.reset();
+		getActionChoice().reset();
 		if (rootAction != null) {
-			rootAction.choiceActions(actionChoice);
+			rootAction.choiceActions(getActionChoice());
 		}
 		
-		actionChoice.step(delta);
+		getActionChoice().step(delta);
 	}
 
 	public float getThinkSpeed() {
@@ -70,9 +72,11 @@ public class Npc extends BasicShape {
 		this.moveSpeed = moveSpeed;
 	}
 
-	public void render(SpriteBatch batch) {
-		if (writeChoices) {
-			actionChoice.render(batch);
-		}
-	}	
+	public ActionChoice getActionChoice() {
+		return actionChoice;
+	}
+
+	public void setActionChoice(ActionChoice actionChoice) {
+		this.actionChoice = actionChoice;
+	}
 }

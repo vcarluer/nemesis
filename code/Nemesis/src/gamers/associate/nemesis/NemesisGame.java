@@ -1,34 +1,40 @@
 package gamers.associate.nemesis;
 
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+
 import gamers.associate.nemesis.ia.Director;
 import gamers.associate.nemesis.map.Map;
+import gamers.associate.nemesis.map.World;
 import gamers.associate.nemesis.ui.CameraManager;
 import gamers.associate.nemesis.ui.Renderer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 public class NemesisGame implements ApplicationListener {
 	private CameraManager camera;
 	private SpriteBatch batch;
-	/*private Texture texture;
-	private Sprite sprite;*/
 	private ShapeRenderer shapeRenderer;
 	private Director director;
+	private Director futureDirector;
+	
+	private static NemesisGame game;
+	
+	public static NemesisGame get() {
+		return game;
+	}
 		
 	@Override
-	public void create() {		
+	public void create() {
+		game = this;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
@@ -36,20 +42,12 @@ public class NemesisGame implements ApplicationListener {
 		camera = CameraManager.get();
 		
 		batch = new SpriteBatch();
-		
-		/*texture = new Texture(Gdx.files.internal("data/libgdx.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
-		
-		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);*/
-		
+			
 		shapeRenderer = new ShapeRenderer();
 				
-		director = new Director(Map.get());
+		director = new Director(Map.get(), World.get());
+		director.initFromMap();
+		director.initRenderer();
 	}
 
 	@Override
@@ -64,22 +62,29 @@ public class NemesisGame implements ApplicationListener {
 		camera.render();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-	
-		director.step(Gdx.graphics.getDeltaTime());
+					
+		Director dir = director;
+		if (futureDirector != null) {
+			dir = futureDirector;
+		}
+		
+		dir.step(Gdx.graphics.getDeltaTime());
 		batch.setProjectionMatrix(camera.cam.combined);
 				
-		Map.get().renderFloor(camera.cam);
+		Map.get().renderFloor(camera.cam);		
 		
 		shapeRenderer.setProjectionMatrix(camera.cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		Renderer.get().render(shapeRenderer);
+		dir.getRenderer().render(shapeRenderer);
 		shapeRenderer.end();
 		
 		Map.get().renderFront();
 		
 		batch.begin();
-		director.render(batch);
-		batch.end();		
+		dir.getRenderer().render(batch);
+		batch.end();
+		
+		dir.render(shapeRenderer);		
 	}
 
 	@Override
@@ -92,5 +97,13 @@ public class NemesisGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+
+	public Director getFutureDirector() {
+		return futureDirector;
+	}
+
+	public void setFutureDirector(Director futureDirector) {
+		this.futureDirector = futureDirector;
 	}
 }

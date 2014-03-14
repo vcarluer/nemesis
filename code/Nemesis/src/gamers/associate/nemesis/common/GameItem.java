@@ -36,4 +36,7 @@ public class GameItem implements Serializable {
 	public Vector2 getPos() {
 		return pos;
 	}
+	
+	public void step(float delta) {
+	}
 }

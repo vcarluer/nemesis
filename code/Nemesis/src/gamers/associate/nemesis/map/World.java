@@ -33,22 +33,21 @@ public class World implements Serializable {
 	
 	private World() {
 		items = new ArrayList<GameItem>();
-		npcs = new ArrayList<Npc>();
+		setNpcs(new ArrayList<Npc>());
 		setDynamicItems(new HashMap<String, GameItem>());
 		targetableItems = new ArrayList<BasicShape>();
 	}
 	
 	public void addNpc(Npc npc) {
-		this.npcs.add(npc);
-		this.addItem(npc);
+		this.getNpcs().add(npc);
+		addItem(npc);
 		addTargetableItem(npc);
 		addDynamicItem(npc);
 	}
 	
 	public void setPlayer(Player player) {
 		this.player = player;
-		this.addItem(player);
-		this.addTargetableItem(player);
+		addNpc(player);
 	}
 		
 	private void addItem(GameItem item) {
@@ -89,5 +88,13 @@ public class World implements Serializable {
 
 	public void setDynamicItems(HashMap<String, GameItem> dynamicItems) {
 		this.dynamicItems = dynamicItems;
+	}
+
+	public List<Npc> getNpcs() {
+		return npcs;
+	}
+
+	public void setNpcs(List<Npc> npcs) {
+		this.npcs = npcs;
 	}
 }

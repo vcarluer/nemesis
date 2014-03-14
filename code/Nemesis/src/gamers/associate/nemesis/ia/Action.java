@@ -1,12 +1,11 @@
 package gamers.associate.nemesis.ia;
 
-import gamers.associate.nemesis.common.GameItem;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public abstract class Action {
+public abstract class Action implements Serializable {
 	private String id;	
 	protected Npc npc;
 	protected EnumSet<BodyConstraint> bodyConstraints;
