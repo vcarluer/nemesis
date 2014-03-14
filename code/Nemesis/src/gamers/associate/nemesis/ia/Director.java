@@ -34,11 +34,6 @@ public class Director {
 		this.world = world;	
 		renderer = new Renderer();
 	}
-	
-	public Director(Map map, World world, float life) {
-		this(map, world);
-		this.lifetime = life;
-	}
 		
 	public void initFromMap() {
 		initNpcs();
@@ -60,9 +55,9 @@ public class Director {
 	}
 	
 	public void step(float delta) {
-		if (lifetime > 0) {
+		if (getLifetime() > 0) {
 			age += delta;
-			if (age > lifetime) {
+			if (age > getLifetime()) {
 				dead = true;
 				NemesisGame.get().setFutureDirector(null);				
 			}
@@ -93,15 +88,24 @@ public class Director {
 	}
 
 	public void render(ShapeRenderer shapeRenderer) {
-		if (lifetime > 0) {			
+		if (getLifetime() > 0) {			
 			Gdx.gl.glEnable(GL10.GL_BLEND);			
 			// Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 			Gdx.gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE);
-			shapeRenderer.begin(ShapeType.Filled);
-			shapeRenderer.setColor(new Color(0.4f, 0.4f, 0.4f, 0.3f));
+			shapeRenderer.begin(ShapeType.Filled);			
+			float color = age / getLifetime();
+			shapeRenderer.setColor(new Color(color, color, color, 0.3f));
 			shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			shapeRenderer.end();
 			Gdx.gl.glDisable(GL10.GL_BLEND);
 		}
+	}
+
+	public float getLifetime() {
+		return lifetime;
+	}
+
+	public void setLifetime(float lifetime) {
+		this.lifetime = lifetime;
 	}
 }
