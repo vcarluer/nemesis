@@ -17,11 +17,15 @@ public class ActionFuture implements IAction {
 		World futureWorld = Cloner.copy(base);
 		Director futureDirector = new Director(Map.get(), futureWorld);
 		float step = 0.1f;
-		for (float delta = 0; delta < 8.0f; delta += step) {
+		float speed = 8f;
+		float gap = 0.0f * speed;
+		float duration = 3f;
+		for (float delta = 0; delta < gap; delta += step) {
 			futureDirector.step(step);
 		}
 		
-		futureDirector.setLifetime(4f);
+		futureDirector.setLifetime(duration);
+		futureDirector.setSpeedFactor(speed);
 		
 		futureDirector.initRenderer();
 		NemesisGame.get().setFutureDirector(futureDirector);

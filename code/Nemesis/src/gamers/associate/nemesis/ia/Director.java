@@ -28,11 +28,13 @@ public class Director {
 	private float age;
 	private float lifetime;
 	private boolean dead;
+	private float speedFactor;
 	
 	public Director(Map map, World world) {		
 		this.map = map;
 		this.world = world;	
 		renderer = new Renderer();
+		speedFactor = 1;
 	}
 		
 	public void initFromMap() {
@@ -64,8 +66,9 @@ public class Director {
 		}
 		
 		if (!dead) {
-			for (GameItem item : world.getDynamicItems().values()) {
-				item.step(delta);
+			float speedDelta = delta * speedFactor;
+			for (GameItem item : world.getDynamicItems().values()) {				
+				item.step(speedDelta);
 			}
 		}
 	}
@@ -107,5 +110,13 @@ public class Director {
 
 	public void setLifetime(float lifetime) {
 		this.lifetime = lifetime;
+	}
+
+	public float getSpeedFactor() {
+		return speedFactor;
+	}
+
+	public void setSpeedFactor(float speedFactor) {
+		this.speedFactor = speedFactor;
 	}
 }
