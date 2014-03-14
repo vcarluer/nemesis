@@ -16,6 +16,9 @@ public class CameraManager implements ApplicationListener {
    
     public	OrthographicCamera  cam;
     private float               rotationSpeed;
+    private Rectangle           glViewport;
+    private float xShift;
+    private float yShift;
 
     private static CameraManager cameraManager;
     
@@ -32,21 +35,32 @@ public class CameraManager implements ApplicationListener {
         float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
-        cam = new OrthographicCamera(w / Map.TILE_SIZE, h / Map.TILE_SIZE);        
-        cam.translate(w / (2 * Map.TILE_SIZE), h / (2 * Map.TILE_SIZE));
+        cam = new OrthographicCamera(w / Map.TILE_SIZE, h / Map.TILE_SIZE);   
+        glViewport = new Rectangle(0, 0, w, h);
+        xShift = w / (2 * Map.TILE_SIZE);
+        yShift = h / (2 * Map.TILE_SIZE);
+        cam.translate(xShift, yShift);
         cam.update();
 
+    }
+    
+    public float getX() {
+    	return this.cam.position.x - xShift;
+    }
+    
+    public float getY() {
+    	return this.cam.position.y - yShift;
     }
 
     @Override
     public void render() {
         handleInput();
-        //GL10 gl = Gdx.graphics.getGL10();
+        GL10 gl = Gdx.graphics.getGL10();
 
         // Camera --------------------- /
         //gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        //gl.glViewport((int) glViewport.x, (int) glViewport.y,
-        //        (int) glViewport.width, (int) glViewport.height);
+        gl.glViewport((int) glViewport.x, (int) glViewport.y,
+                (int) glViewport.width, (int) glViewport.height);
 
         cam.update();
         //cam.apply(gl);
@@ -88,7 +102,7 @@ public class CameraManager implements ApplicationListener {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.E)) {
             cam.rotate(rotationSpeed, 0, 0, 1);
-        }
+        }        
     }
 
     @Override

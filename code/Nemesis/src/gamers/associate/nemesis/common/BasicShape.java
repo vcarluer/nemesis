@@ -1,7 +1,5 @@
 package gamers.associate.nemesis.common;
 
-import gamers.associate.nemesis.map.Map;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,27 +7,49 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class BasicShape extends GameItem {
 	private Rectangle rect;
 	private Color color; 
+	private boolean isTargeted;
 
 	public BasicShape(float x, float y, float width, float height, Color color) { 
 		super(x, y);
 		
-		rect = new Rectangle(x, y, width, height);
+		setRect(new Rectangle(x, y, width, height));
 		this.color = color;
 	}
 	
 	public void render(ShapeRenderer renderer) {
-		rect.x = this.getX() - rect.width / 2f;		
-		rect.y = this.getY() - rect.height / 2f;
+		getRect().x = this.getX() - getRect().width / 2f;		
+		getRect().y = this.getY() - getRect().height / 2f;
 		
-		renderer.setColor(color);
-		renderer.rect(rect.x, rect.y, rect.width, rect.height);
+		Color renderColor = new Color(color);
+		if (this.isTargeted) {
+			renderColor.b = 0.3f;
+		}
+		
+		renderer.setColor(renderColor);
+		renderer.rect(getRect().x, getRect().y, getRect().width, getRect().height);
 	}
 	
 	public float getWidth(){
-		return this.rect.width;
+		return this.getRect().width;
 	}
 	
 	public float getHeight(){
-		return this.rect.height;
+		return this.getRect().height;
+	}
+
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
+	}
+
+	public boolean isTargeted() {
+		return isTargeted;
+	}
+
+	public void setTargeted(boolean isTargeted) {
+		this.isTargeted = isTargeted;
 	}
 }

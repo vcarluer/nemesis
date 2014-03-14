@@ -76,6 +76,8 @@ public class Map {
 					TiledMapTile tile = cell.getTile();
 					if (tile.getProperties().containsKey("wall")) {
 						getWalls()[x][y] = true;
+						Wall wall = new Wall(x, y);
+						World.get().addWall(wall);
 					}
 				}				
 			}

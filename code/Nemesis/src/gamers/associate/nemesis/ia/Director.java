@@ -2,6 +2,7 @@ package gamers.associate.nemesis.ia;
 
 import gamers.associate.nemesis.common.Player;
 import gamers.associate.nemesis.map.Map;
+import gamers.associate.nemesis.map.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Director {
 		Vector2 pos = this.map.getPlayerStart();
 		shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");
 		shoty.create();
+		World.get().addNpc(shoty);
 		npcs.add(shoty);
 		
 	}
@@ -49,6 +51,7 @@ public class Director {
 	private void initPlayer() {
 		Vector2 pos = this.map.getPlayerStart();
 		silk = new Player(pos.x, pos.y, 1f, 1f, Color.RED, "silk");
+		World.get().setPlayer(silk);
 		//npcs.add(shoty);
 	}
 

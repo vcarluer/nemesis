@@ -1,17 +1,25 @@
 package gamers.associate.nemesis.common;
 
+import gamers.associate.nemesis.action.ActionFuture;
+import gamers.associate.nemesis.action.IAction;
 import gamers.associate.nemesis.ia.Action;
 import gamers.associate.nemesis.ia.ActionMove;
 import gamers.associate.nemesis.ia.Npc;
 import gamers.associate.nemesis.map.Map;
+import gamers.associate.nemesis.map.World;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Npc implements  InputProcessor {
+
+	private boolean isSelectMode;
+	private IAction currentAction;
+	private BasicShape target;
 
 	public Player(float x, float y, float width, float height, Color color,
 			String name) {
@@ -20,6 +28,25 @@ public class Player extends Npc implements  InputProcessor {
 		Gdx.input.setInputProcessor(this);
 		
 		writeChoices = true;
+	}
+	
+	
+
+	@Override
+	public void step(float delta) {
+		this.handleInput();
+		super.step(delta);
+	}
+
+	private void handleInput() {
+		if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+        	this.isSelectMode = true;
+        	this.currentAction = new ActionFuture();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        	this.currentAction = null;
+        	this.isSelectMode = false;        
+        }
 	}
 
 	@Override
@@ -48,18 +75,33 @@ public class Player extends Npc implements  InputProcessor {
 		float posX;		
 		float posY;
 		if(button == Buttons.RIGHT){
-            posX = (screenX - this.getWidth()/2)/ Map.TILE_SIZE;
-            posY = (Gdx.graphics.getHeight() - screenY - this.getHeight()/2)/Map.TILE_SIZE;
+			
+			
+            Vector2 pos = World.get().getWorldPos(screenX, screenY);            
 
             
             if (rightClickAction != null) {
             	rightClickAction.cancelAction();
             }
             
-            rightClickAction = new ActionMove(this, rootAction, new Vector2(posX, posY));						
+            rightClickAction = new ActionMove(this, rootAction, pos);						
     		rootAction.addAction(rightClickAction);
     		
         }
+		
+		if (button == Buttons.LEFT) {
+			if (this.target != null) {
+				this.target.setTargeted(false);
+			}
+			this.target = World.get().getTarget(screenX, screenY);
+			if (this.target != null) {
+				this.target.setTargeted(true);
+			}
+			
+			if (this.currentAction != null) {
+				this.currentAction.Do(this.target);
+			}
+		}
         
         return false;
 	}
@@ -94,8 +136,5 @@ public class Player extends Npc implements  InputProcessor {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-
-		
+	}		
 }
