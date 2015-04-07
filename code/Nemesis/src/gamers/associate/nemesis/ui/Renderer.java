@@ -21,9 +21,9 @@ public class Renderer {
 		}
 	}
 	
-	public void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch, CameraManager cameraManager) {
 		for (ActionChoiceRenderer choice : choiceRenderers) {
-			choice.render(batch);
+			choice.render(batch, cameraManager);
 		}
 	}
 	

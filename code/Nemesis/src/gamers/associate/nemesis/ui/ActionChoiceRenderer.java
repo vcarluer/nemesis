@@ -25,18 +25,18 @@ public class ActionChoiceRenderer {
 		bitmapFont.setScale(1 / Map.TILE_SIZE);
 	}
 	
-	public void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch, CameraManager camera) {
 		
 		if (choice.getPositionAction() != null) {
-			bitmapFont.draw(batch, "Move: " + choice.getPositionAction().getId(), 0, CameraManager.get().cam.viewportHeight);
+			bitmapFont.draw(batch, "Move: " + choice.getPositionAction().getId(), 0, camera.cam.viewportHeight);
 		}
 		
 		if (choice.getHandsAction() != null) {
-			bitmapFont.draw(batch, "Hand: " + choice.getHandsAction().getId(), 0, CameraManager.get().cam.viewportHeight - 1);
+			bitmapFont.draw(batch, "Hand: " + choice.getHandsAction().getId(), 0, camera.cam.viewportHeight - 1);
 		}
 		
 		if (choice.getHeadAction() != null) {
-			bitmapFont.draw(batch, "Head: " + choice.getHeadAction().getId(), 0, CameraManager.get().cam.viewportHeight - 2);
+			bitmapFont.draw(batch, "Head: " + choice.getHeadAction().getId(), 0, camera.cam.viewportHeight - 2);
 		}
 				
 	}

@@ -45,6 +45,10 @@ public class World implements Serializable {
 		addDynamicItem(npc);
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public void setPlayer(Player player) {
 		this.player = player;
 		addNpc(player);
@@ -62,8 +66,7 @@ public class World implements Serializable {
 		targetableItems.add(item);
 	}
 	
-	public BasicShape getTarget(int screenX, int screenY) {
-		Vector2 pos = getWorldPos(screenX, screenY);
+	public BasicShape getTarget(Vector2 pos) {		
 		BasicShape target = null;
 		for (BasicShape item : targetableItems) {
 			if (item.getRect().contains(pos)) {
@@ -73,13 +76,6 @@ public class World implements Serializable {
 		}
 		
 		return target;
-	}
-	
-	public Vector2 getWorldPos(int screenX, int screenY) {
-		Vector2 pos = new Vector2();
-		pos.x = CameraManager.get().getX() + (screenX / Map.TILE_SIZE);
-		pos.y = CameraManager.get().getY() + ((Gdx.graphics.getHeight() - screenY) / Map.TILE_SIZE);
-		return pos;
 	}
 
 	public HashMap<String, GameItem> getDynamicItems() {

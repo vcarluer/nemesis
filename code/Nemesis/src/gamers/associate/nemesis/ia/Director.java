@@ -7,6 +7,7 @@ import gamers.associate.nemesis.map.Map;
 import gamers.associate.nemesis.map.World;
 import gamers.associate.nemesis.ui.ActionChoiceRenderer;
 import gamers.associate.nemesis.ui.BasicShapeRenderer;
+import gamers.associate.nemesis.ui.CameraManager;
 import gamers.associate.nemesis.ui.Renderer;
 
 import java.util.ArrayList;
@@ -29,12 +30,14 @@ public class Director {
 	private float lifetime;
 	private boolean dead;
 	private float speedFactor;
+	private CameraManager cameraManager;
 	
 	public Director(Map map, World world) {		
 		this.map = map;
-		this.world = world;	
+		this.setWorld(world);	
 		renderer = new Renderer();
 		speedFactor = 1;
+		setCameraManager(new CameraManager(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 	}
 		
 	public void initFromMap() {
@@ -43,7 +46,7 @@ public class Director {
 	}
 	
 	public void initRenderer() {
-		for (Npc npc : world.getNpcs()) {
+		for (Npc npc : getWorld().getNpcs()) {
 			Color color = Color.GREEN;
 			if (npc.getId().equals("shoty")) {
 				color = Color.RED;
@@ -67,7 +70,7 @@ public class Director {
 		
 		if (!dead) {
 			float speedDelta = delta * speedFactor;
-			for (GameItem item : world.getDynamicItems().values()) {				
+			for (GameItem item : getWorld().getDynamicItems().values()) {				
 				item.step(speedDelta);
 			}
 		}
@@ -77,13 +80,13 @@ public class Director {
 		Vector2 pos = this.map.getPlayerStart();
 		Npc shoty = new Npc(pos.x, pos.y, 0.5f, 1f, Color.GREEN, "shoty");		
 		shoty.create();
-		world.addNpc(shoty);
+		getWorld().addNpc(shoty);
 	}
 	
 	private void initPlayer() {
 		Vector2 pos = this.map.getPlayerStart();
 		Player silk = new Player(pos.x, pos.y, 1f, 1f, Color.RED, "silk");		
-		world.setPlayer(silk);
+		getWorld().setPlayer(silk);
 	}
 	
 	public Renderer getRenderer() {
@@ -118,5 +121,36 @@ public class Director {
 
 	public void setSpeedFactor(float speedFactor) {
 		this.speedFactor = speedFactor;
+	}
+	
+	public Vector2 getWorldPos(int screenX, int screenY) {
+		Vector2 pos = new Vector2();
+		pos.x = getCameraManager().getX() + (screenX / Map.TILE_SIZE);
+		pos.y = getCameraManager().getY() + ((Gdx.graphics.getHeight() - screenY) / Map.TILE_SIZE);
+		return pos;
+	}
+
+	public void render(SpriteBatch batch) {
+		renderer.render(batch, getCameraManager());		
+	}
+
+	public CameraManager getCameraManager() {
+		return cameraManager;
+	}
+
+	public void setCameraManager(CameraManager cameraManager) {
+		this.cameraManager = cameraManager;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	public void renderCamera() {
+		cameraManager.render();		
 	}
 }
